@@ -9,7 +9,7 @@ int		ft_find_parameter(char *str, s_args *list)
 	tmp_str = str;
 	while (*tmp_str >= '0' && *tmp_str <= '9')
 		tmp_str++;
-	if (*tmp_str == '$')
+	if (*tmp_str == '$' && tmp_str != str)
 	{
 		list->order_counter = ft_atoi(str);
 		return (tmp_str - str + 1);
@@ -78,23 +78,29 @@ int		ft_find_precision(char *str, s_args *list)
 {
 	char	*tmp_str;
 
-	if (str[0] == '.' && str[1] == '*')
+	if (str[0] == '.' && str[1] == '*' && (str[2] >= '0' || str[2] <= '9') &&
+	str[3] == '$')
 	{
-		if ((str[2] >= '1' && str[2] <= '9') && str[3] == '$' &&
-		(list->n_arg_precision = str[2] - '0'))
-			return (4);
-		else
+		list->n_arg_precision = str[2] - '0';
+		return (4);
+	}
+	if (str[0] == '.' && (str[1] == '0' || str[1] == '*'))
+	{
+		if (str[1] == '*')
 		{
 			list->n_arg_precision = list->order_counter;
 			list->order_counter += 1;
-			return (2);
 		}
+		else
+		{
+			list->n_arg_precision = 0;
+			list->precision = 0;
+		}
+		return (2);
 	}
-	else if (str[0] == '.' && str[1] >= '0' && str[1] <= '9')
+	if (str[0] == '.' && str[1] >= '1' && str[1] <= '9')
 	{
 		list->n_arg_precision = 0;
-		if (str[1] == '0' && !(list->precision = 0))
-			return (2);
 		tmp_str = &str[1];
 		while (*tmp_str >= '0' && *tmp_str <= '9')
 			tmp_str++;
@@ -106,33 +112,23 @@ int		ft_find_precision(char *str, s_args *list)
 
 int		ft_find_length(char *str, s_args *list)
 {
-	if (*str)
+	if ((str[0] == 'h' && str[1] == 'h') || (str[0] == 'l' && str[1] == 'l'))
 	{
-		if (str[0] == 'h' && str[1] == 'h')
-		{
+		if (str[0] == 'h')
 			list->length = CHAR;
-			return (2);
-		}
-		else if (str[0] == 'h')
-		{
-			list->length = SHORT;
-			return (1);
-		}
-		else if (str[0] == 'l' && str[1] == 'l')
-		{
+		else
 			list->length = LONG_LONG;
-			return (2);
-		}
+		return (2);
+	}
+	else if (str[0] == 'h' || str[0] == 'l' || str[0] == 'L')
+	{
+		if (str[0] == 'h')
+			list->length = SHORT;
 		else if (str[0] == 'l')
-		{
 			list->length = LONG;
-			return (1);
-		}
-		else if (str[0] == 'L')
-		{
+		else
 			list->length = LONG_DOUBLE;
-			return (1);
-		}
+		return (1);
 	}
 	return (0);
 }

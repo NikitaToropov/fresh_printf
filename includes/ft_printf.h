@@ -31,6 +31,7 @@
 // ERRORS
 #define MEM_IS_NOT_ALLOC			1
 #define UNKNOWN_CHAR				2
+#define ARG_OMITTED					3
 
 
 typedef struct							t_float

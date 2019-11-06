@@ -1,10 +1,10 @@
 #include "ft_printf.h"
 
-char	ft_find_type(char *str)
+char		ft_find_type(char *str)
 {
 	while (*str)
 	{
-		if (*str == 'c' ||	*str == 's' || *str == 'p' ||
+		if (*str == 'c' || *str == 's' || *str == 'p' ||
 		*str == 'i' || *str == 'd' || *str == 'u' ||
 		*str == 'o' || *str == 'x' || *str == 'X' ||
 		*str == 'f' || *str == '%')
@@ -17,27 +17,22 @@ char	ft_find_type(char *str)
 
 s_args		*ft_make_blank_list(int counter)
 {
-	s_args		*list;
+	s_args			*list;
 
 	if (!(list = malloc(sizeof(s_args))))
 		ft_errors(MEM_IS_NOT_ALLOC);
 	list->order_counter = counter;
-
 	list->n_arg_width = 0;
 	list->n_arg_precision = 0;
 	list->n_arg = 0;
-
 	list->width = -1;
 	list->precision = -1;
-	
-	list->int_arg = 0; 
-	list->float_arg = 0; 
+	list->int_arg = 0;
+	list->float_arg = 0;
 	list->float_list = NULL;
-
 	list->flags = 0;
 	list->length = 0;
 	list->type = 0;
-
 	list->arg_str = NULL;
 	list->next = NULL;
 	return (list);
@@ -45,8 +40,8 @@ s_args		*ft_make_blank_list(int counter)
 
 char		*ft_parse_format_placeholder(char *str, s_args *list)
 {
-	char		*tmp_list;
-	
+	char			*tmp_list;
+
 	list->type = ft_find_type(str);
 	while (*str != list->type)
 	{
@@ -68,7 +63,7 @@ s_args		*ft_format_string_parse(char *str)
 {
 	s_args			*list;
 	s_args			*first_list;
-	
+
 	first_list = NULL;
 	while (*str)
 	{
