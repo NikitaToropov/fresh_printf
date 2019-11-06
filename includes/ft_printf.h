@@ -13,25 +13,25 @@
 //	%[parameter][flags][width][.precision][length]type
 
 // FLAGS
-#define HASH						1
-#define ZERO						2
-#define MINUS						4
-#define SPACE						8
-#define PLUS						16
-#define APOSTROPHE					32
-#define BINARY						64
+#define HASH							1
+#define ZERO							2
+#define MINUS							4
+#define SPACE							8
+#define PLUS							16
+#define APOSTROPHE						32
+#define BINARY							64
 
 // LENGTH:
-#define SHORT						's'
-#define CHAR						'c'
-#define LONG						'l'
-#define LONG_LONG					'L'
-#define LONG_DOUBLE					'D'
+#define SHORT							's'
+#define CHAR							'c'
+#define LONG							'l'
+#define LONG_LONG						'L'
+#define LONG_DOUBLE						'D'
 
 // ERRORS
-#define MEM_IS_NOT_ALLOC			1
-#define UNKNOWN_CHAR				2
-#define ARG_OMITTED					3
+#define MEM_IS_NOT_ALLOC				1
+#define UNKNOWN_CHAR					2
+#define ARG_OMITTED						3
 
 
 typedef struct							t_float
@@ -67,8 +67,18 @@ typedef struct							t_args
 
 // secondary functions
 void		ft_errors(int code);
-int			ft_atoi(const char *str);
+int			ft_arg_is_integer(char type);
 
+char		*ft_strdup(const char *s1);
+int			ft_atoi(const char *str);
+char		*ft_itoa(long long n);
+char		*ft_itoa_base(unsigned long long n, int base);
+char		*ft_itoa_base_uppercase(unsigned long long n, int base);
+char		*ft_itoa_pointer(unsigned long long n);
+
+
+// convert args from int/float to string
+void		ft_convert_to_string(s_args *first_list);
 
 // format string parsing
 int			ft_find_length(char *str, s_args *list);

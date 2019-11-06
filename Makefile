@@ -11,7 +11,10 @@ INCLUDES = ./includes
 C_FILES = 	ft_printf.c\
 			ft_format_string_parse.c\
 			fields_parsers.c\
+			ft_convert_to_string.c\
+			ft_strdup.c\
 			ft_atoi.c\
+			fts_itoa.c\
 			ft_errors.c\
 
 

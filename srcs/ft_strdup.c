@@ -10,7 +10,7 @@ char	*ft_strdup(const char *s1)
 		ln++;
 	res = (char*)malloc(sizeof(char) * (ln + 1));
 	if (!res)
-		ft_error(1);
+		ft_errors(MEM_IS_NOT_ALLOC);
 	res[ln] = '\0';
 	ln--;
 	while (ln >= 0)

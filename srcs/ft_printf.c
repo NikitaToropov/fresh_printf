@@ -27,7 +27,7 @@ int		ft_find_latest_arg(s_args *list)
 	return (biggest);
 }
 
-char	ft_select_argument_type(s_args *list, int counter_arg)
+char	ft_slct_type(s_args *list, int counter_arg)
 {
 	while (list)
 	{
@@ -69,31 +69,28 @@ int		ft_printf(const char *format, ...)
 {
 	s_args					*first_list;
 	va_list					ap;
-	int						latest_arg;
-	int						counter_arg;
-	char					type_selector;
+	int						last_arg;
+	int						cntr;
+	char					arg_type;
 
 	first_list = ft_format_string_parse((char*)format);
+	last_arg = ft_find_latest_arg(first_list);
+	cntr = 1;
 	va_start(ap, format);
-	latest_arg = ft_find_latest_arg(first_list);
-	counter_arg = 1;
-	while (counter_arg <= latest_arg)
+	while (cntr <= last_arg && (arg_type = ft_slct_type(first_list, cntr)))
 	{
-		type_selector = ft_select_argument_type(first_list, counter_arg);
-		if (type_selector == 'i')
-			ft_put(first_list, counter_arg, va_arg(ap, long int), 0);
-		else if (type_selector == 'f')
-			ft_put(first_list, counter_arg, 0, (long double)va_arg(ap, double));
-		else if (type_selector == 'F')
-			ft_put(first_list, counter_arg, 0, va_arg(ap, long double));
+		if (arg_type == 'i')
+			ft_put(first_list, cntr, va_arg(ap, long int), 0);
+		else if (arg_type == 'f')
+			ft_put(first_list, cntr, 0, (long double)va_arg(ap, double));
+		else if (arg_type == 'F')
+			ft_put(first_list, cntr, 0, va_arg(ap, long double));
 		else
-		{
-			printf("%i\n", counter_arg);
 			ft_errors(ARG_OMITTED);
-		}
-		counter_arg++;
+		cntr++;
 	}
 	va_end(ap);
+	ft_convert_to_string(first_list);
 
 	
 	while (first_list)

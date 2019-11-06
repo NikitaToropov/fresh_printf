@@ -79,18 +79,12 @@ int		ft_find_precision(char *str, s_args *list)
 	char	*tmp_str;
 
 	if (str[0] == '.' && str[1] == '*' && (str[2] >= '0' || str[2] <= '9') &&
-	str[3] == '$')
-	{
-		list->n_arg_precision = str[2] - '0';
+	str[3] == '$' && (list->n_arg_precision = str[2] - '0'))
 		return (4);
-	}
 	if (str[0] == '.' && (str[1] == '0' || str[1] == '*'))
 	{
-		if (str[1] == '*')
-		{
-			list->n_arg_precision = list->order_counter;
+		if (str[1] == '*' && (list->n_arg_precision = list->order_counter))
 			list->order_counter += 1;
-		}
 		else
 		{
 			list->n_arg_precision = 0;
@@ -98,10 +92,9 @@ int		ft_find_precision(char *str, s_args *list)
 		}
 		return (2);
 	}
-	if (str[0] == '.' && str[1] >= '1' && str[1] <= '9')
+	if (str[0] == '.' && str[1] >= '1' && str[1] <= '9' && (tmp_str = &str[1]))
 	{
 		list->n_arg_precision = 0;
-		tmp_str = &str[1];
 		while (*tmp_str >= '0' && *tmp_str <= '9')
 			tmp_str++;
 		list->precision = ft_atoi(&str[1]);
