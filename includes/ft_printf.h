@@ -13,24 +13,24 @@
 //	%[parameter][flags][width][.precision][length]type
 
 // FLAGS
-#define HASH					1
-#define ZERO					2
-#define MINUS					4
-#define SPACE					8
-#define PLUS					16
-#define APOSTROPHE				32
-#define BINARY					64
+#define HASH						1
+#define ZERO						2
+#define MINUS						4
+#define SPACE						8
+#define PLUS						16
+#define APOSTROPHE					32
+#define BINARY						64
 
 // LENGTH:
-#define SHORT						1
-#define CHAR						2
-#define LONG						4
-#define LONG_LONG					8
-#define LONG_DOUBLE					16
+#define SHORT						's'
+#define CHAR						'c'
+#define LONG						'l'
+#define LONG_LONG					'L'
+#define LONG_DOUBLE					'D'
 
 // ERRORS
 #define MEM_IS_NOT_ALLOC			1
-#define UNKNOWN_CHAR				16
+#define UNKNOWN_CHAR				2
 
 
 typedef struct							t_float

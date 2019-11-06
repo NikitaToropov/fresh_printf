@@ -20,7 +20,7 @@ s_args		*ft_make_blank_list(int counter)
 	s_args		*list;
 
 	if (!(list = malloc(sizeof(s_args))))
-		ft_errors(1);
+		ft_errors(MEM_IS_NOT_ALLOC);
 	list->order_counter = counter;
 
 	list->n_arg_width = 0;

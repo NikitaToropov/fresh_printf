@@ -9,23 +9,23 @@
 // 	return (0);
 // }
 
-// int		ft_find_ltst_arg(s_args *list)
-// {
-// 	int		biggest;
+int		ft_find_latest_arg(s_args *list)
+{
+	int		biggest;
 
-// 	biggest = 0;
-// 	while (list)
-// 	{
-// 		if (biggest < list->n_arg_width)
-// 			biggest = list->n_arg_width;
-// 		if (biggest < list->n_arg_precision)
-// 			biggest = list->n_arg_precision;
-// 		if (biggest < list->n_arg)
-// 			biggest = list->n_arg;
-// 		list = list->next;
-// 	}
-// 	return (biggest);
-// }
+	biggest = 0;
+	while (list)
+	{
+		if (biggest < list->n_arg_width)
+			biggest = list->n_arg_width;
+		if (biggest < list->n_arg_precision)
+			biggest = list->n_arg_precision;
+		if (biggest < list->n_arg)
+			biggest = list->n_arg;
+		list = list->next;
+	}
+	return (biggest);
+}
 
 // char	ft_selector_of_types(s_args *list, int counter_arg)
 // {
@@ -84,8 +84,11 @@
 int		ft_printf(const char *format, ...)
 {
 	s_args					*first_list;
+	int						latest_arg;
 
 	first_list = ft_format_string_parse((char*)format);
+	latest_arg = ft_find_latest_arg(first_list);
+
 	
 	while (first_list)
 	{

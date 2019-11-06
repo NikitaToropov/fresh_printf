@@ -98,6 +98,7 @@ int		ft_find_precision(char *str, s_args *list)
 		tmp_str = &str[1];
 		while (*tmp_str >= '0' && *tmp_str <= '9')
 			tmp_str++;
+		list->precision = ft_atoi(&str[1]);
 		return (tmp_str - str);
 	}
 	return (0);
@@ -109,27 +110,27 @@ int		ft_find_length(char *str, s_args *list)
 	{
 		if (str[0] == 'h' && str[1] == 'h')
 		{
-			list->length &= CHAR;
+			list->length = CHAR;
 			return (2);
 		}
 		else if (str[0] == 'h')
 		{
-			list->length &= SHORT;
+			list->length = SHORT;
 			return (1);
 		}
 		else if (str[0] == 'l' && str[1] == 'l')
 		{
-			list->length &= LONG_LONG;
+			list->length = LONG_LONG;
 			return (2);
 		}
 		else if (str[0] == 'l')
 		{
-			list->length &= LONG;
+			list->length = LONG;
 			return (1);
 		}
 		else if (str[0] == 'L')
 		{
-			list->length &= LONG_DOUBLE;
+			list->length = LONG_DOUBLE;
 			return (1);
 		}
 	}
