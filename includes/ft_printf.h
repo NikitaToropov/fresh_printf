@@ -33,6 +33,11 @@
 #define UNKNOWN_CHAR					2
 #define ARG_OMITTED						3
 
+// FLOATS
+#define DBL_DIG							15
+#define LDBL_DIG						18
+
+
 
 typedef struct							t_float
 {
@@ -61,24 +66,35 @@ typedef struct							t_args
 	char								length;
 	char								type;
 	
-	char								*arg_str;
+	char								*string;
 	struct t_args						*next;
 }										s_args;
 
 // secondary functions
 void		ft_errors(int code);
-int			ft_arg_is_integer(char type);
 
 char		*ft_strdup(const char *s1);
+char		*ft_strchr(const char *s, int c);
+int			ft_strlen(const char *s);
+
 int			ft_atoi(const char *str);
 char		*ft_itoa(long long n);
 char		*ft_itoa_base(unsigned long long n, int base);
-char		*ft_itoa_base_uppercase(unsigned long long n, int base);
+char		*ft_itoa_base_upp(unsigned long long n, int base);
 char		*ft_itoa_pointer(unsigned long long n);
+void		ft_ftoa(s_args *list);
+char		*ft_utf8_coder(int sym);
+
+
 
 
 // convert args from int/float to string
-void		ft_convert_to_string(s_args *first_list);
+void		ft_put_bits_in_tne_list(s_args *list);
+void		ft_parse_len(s_args *list);
+void		ft_parse_precision(s_args *list);
+void		ft_precision_f(s_args *list);
+
+
 
 // format string parsing
 int			ft_find_length(char *str, s_args *list);

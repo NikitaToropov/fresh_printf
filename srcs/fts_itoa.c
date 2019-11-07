@@ -61,7 +61,7 @@ char			*ft_itoa_base(unsigned long long n, int base)
 	return (result);
 }
 
-char			*ft_itoa_base_uppercase(unsigned long long n, int base)
+char			*ft_itoa_base_upp(unsigned long long n, int base)
 {
 	char					*result;
 	char					*l;
@@ -94,6 +94,8 @@ char			*ft_itoa_pointer(unsigned long long n)
 	unsigned int			modulo;
 
 	l = "abcdef";
+	if (n == 0)
+		return (ft_strdup("0x0"));
 	len = ft_uns_len(n, 16) + 2;
 	if (!(result = (char*)malloc(sizeof(char) * (len + 1))))
 		ft_errors(MEM_IS_NOT_ALLOC);

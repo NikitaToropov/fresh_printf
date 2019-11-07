@@ -7,6 +7,5 @@ int		ft_strlen(const char *s)
 	t = (char*)s;
 	while (*t)
 		t++;
-	
 	return (t - (char*)s);
 }

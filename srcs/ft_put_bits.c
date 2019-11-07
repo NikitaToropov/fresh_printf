@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-char	*ft_make_string_bin(void *c, int len)
+char	*ft_put_bits(void *c, int len)
 {
 	unsigned char	scanner;
 	unsigned char	*byte;
@@ -16,38 +16,33 @@ char	*ft_make_string_bin(void *c, int len)
 		while (scanner)
 		{
 			if (*byte & scanner)
-				str[pos] = '1';
+				str[pos++] = '1';
 			else
-				str[pos] = '0';
-			pos++;
+				str[pos++] = '0';
 			if (scanner == 16 || (scanner == 1 && byte != (unsigned char*)c))
-			{
-				str[pos] = ' ';
-				pos++;
-			}
+				str[pos++] = ' ';
 			scanner /= 2;
 		}
 		byte--;
 	}
-
 	str[pos] = '\0';
-	// write(1, "\nwrong\n\n", 8); //-----------------------------------------------------------------
-
 	return (str);
 }
 
-void	ft_put_bits(void *c, s_args *list)
+void	ft_put_bits_in_tne_list(s_args *list)
 {
 	int		len;
 
 	if (list->type == 'f')
 	{
-		if (list->length == 'F')
+		if (list->length == LONG_DOUBLE)
 			len = 10;
 		else
 			len = sizeof(double);
+		list->string = ft_put_bits(&(list->float_arg), len);
 	}
-	else
+	else if (list->type == 'd' || list->type == 'i' ||
+	list->type == 'u' || list->type == 'c')
 	{
 		if (list->length == 'H' || list->type == 'c')
 			len = sizeof(char);
@@ -59,6 +54,6 @@ void	ft_put_bits(void *c, s_args *list)
 			len = sizeof(long int);
 		else
 			len = sizeof(int);
+		list->string = ft_put_bits(&(list->int_arg), len);
 	}
-	list->arg = ft_make_string_bin(c, len);
 }

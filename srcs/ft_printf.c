@@ -1,12 +1,19 @@
 #include "ft_printf.h"
 
-int		ft_arg_is_integer(char type)
+void	ft_convert_to_string(s_args *list)
 {
-	if (type == 'c' || type == 's' || type == 'p' ||
-	type == 'd' || type == 'i' || type == 'o' ||
-	type == 'u' || type == 'x' || type == 'X')
-		return (1);
-	return (0);
+	while (list)
+	{
+		if (list->flags & BINARY)
+			ft_put_bits_in_tne_list(list);
+		if (!(list->string))
+		{
+			list->flags &= (~BINARY);
+			ft_parse_len(list);
+			ft_parse_precision(list);
+		}
+		list = list->next;
+	}
 }
 
 int		ft_find_latest_arg(s_args *list)
@@ -33,13 +40,16 @@ char	ft_slct_type(s_args *list, int counter_arg)
 	{
 		if (list->n_arg_width == counter_arg ||
 		list->n_arg_precision == counter_arg ||
-		(list->n_arg == counter_arg && ft_arg_is_integer(list->type)))
+		(list->n_arg == counter_arg &&
+		(list->type == 'c' || list->type == 's' || list->type == 'p' ||
+		list->type == 'd' || list->type == 'i' || list->type == 'o' ||
+		list->type == 'u' || list->type == 'x' || list->type == 'X')))
 			return ('i');
 		if (list->n_arg == counter_arg && list->type == 'f' &&
-		list->length != 'F')
+		list->length != LONG_DOUBLE)
 			return ('f');
 		if (list->n_arg == counter_arg && list->type == 'f' &&
-		list->length == 'F')
+		list->length == LONG_DOUBLE)
 			return ('F');
 		list = list->next;
 	}
@@ -56,7 +66,9 @@ void	ft_put(s_args *list, int n, unsigned long long i_arg, long double f_arg)
 			list->precision = (int)i_arg;
 		if (list->n_arg == n)
 		{
-			if (ft_arg_is_integer(list->type))
+			if ((list->type == 'c' || list->type == 's' || list->type == 'p' ||
+			list->type == 'd' || list->type == 'i' || list->type == 'o' ||
+			list->type == 'u' || list->type == 'x' || list->type == 'X'))
 				list->int_arg = i_arg;
 			else
 				list->float_arg = f_arg;
@@ -109,6 +121,7 @@ int		ft_printf(const char *format, ...)
 		printf("\"type\"              is '%c'\n\n", first_list->type);
 		printf("\"int_arg\"           is %lli\n", first_list->int_arg);
 		printf("\"float_arg\"         is %Lf\n", first_list->float_arg);
+		printf("\"string\"           is \n%s\n", first_list->string);
 		printf("------------------------------------\n");
 
 

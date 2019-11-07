@@ -33,7 +33,7 @@ s_args		*ft_make_blank_list(int counter)
 	list->flags = 0;
 	list->length = 0;
 	list->type = 0;
-	list->arg_str = NULL;
+	list->string = NULL;
 	list->next = NULL;
 	return (list);
 }
