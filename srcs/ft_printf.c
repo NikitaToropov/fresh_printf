@@ -8,10 +8,13 @@ void	ft_convert_to_string(s_args *list)
 			ft_put_bits_in_tne_list(list);
 		if (!(list->string))
 		{
-			list->flags &= (~BINARY);
+			list->flags &= ~BINARY;
 			ft_parse_len(list);
+			ft_parse_flags_pl_sp(list);
 			ft_parse_precision(list);
 		}
+		ft_parse_flags_hash(list);
+		ft_parse_width(list);
 		list = list->next;
 	}
 }
@@ -121,7 +124,7 @@ int		ft_printf(const char *format, ...)
 		printf("\"type\"              is '%c'\n\n", first_list->type);
 		printf("\"int_arg\"           is %lli\n", first_list->int_arg);
 		printf("\"float_arg\"         is %Lf\n", first_list->float_arg);
-		printf("\"string\"           is \n%s\n", first_list->string);
+		printf("\"string\"           is \n%s|\n", first_list->string);
 		printf("------------------------------------\n");
 
 

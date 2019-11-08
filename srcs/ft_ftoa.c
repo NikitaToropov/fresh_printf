@@ -107,7 +107,7 @@ void	ft_ftoa(s_args *list)
 		tmp = list->float_arg;
 		if (tmp < 0)
 			tmp *= -1;
-		if (list->length == 'F')
+		if (list->length == LONG_DOUBLE)
 			sign_dig = LDBL_DIG;
 		else
 			sign_dig = DBL_DIG;

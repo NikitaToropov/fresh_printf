@@ -37,8 +37,6 @@
 #define DBL_DIG							15
 #define LDBL_DIG						18
 
-
-
 typedef struct							t_float
 {
 	int									total_bits;
@@ -93,6 +91,10 @@ void		ft_put_bits_in_tne_list(s_args *list);
 void		ft_parse_len(s_args *list);
 void		ft_parse_precision(s_args *list);
 void		ft_precision_f(s_args *list);
+void		ft_parse_width(s_args *list);
+void		ft_parse_flags_pl_sp(s_args *list);
+void		ft_parse_flags_hash(s_args *list);
+
 
 
 

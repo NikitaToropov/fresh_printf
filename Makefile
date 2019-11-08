@@ -15,6 +15,8 @@ C_FILES = 	ft_printf.c\
 			ft_parse_len.c\
 			ft_parse_precision.c\
 			ft_precision_f.c\
+			ft_parse_width.c\
+			flags_parsers.c\
 			ft_utf8_coder.c\
 			ft_strchr.c\
 			ft_strlen.c\
@@ -29,7 +31,7 @@ HEADER = $(INCLUDES)/ft_printf.h
 
 SRCS = $(addprefix $(DIR_S)/,$(C_FILES))
 
-OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))
+OBJS = $(addprefix $(DIR_O)/,$(C_FILES:.c=.o))\
 
 # flags
 CC = gcc
