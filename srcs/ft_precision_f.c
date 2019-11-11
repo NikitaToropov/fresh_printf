@@ -59,7 +59,7 @@ void	ft_lengthen_f(s_args *list, int new)
 	free(tmp);
 }
 
-void	ft_precision_f(s_args *list)
+void	ft_precision_f(s_args *list, char *str)
 {
 	char	*frac;
 	int		old;

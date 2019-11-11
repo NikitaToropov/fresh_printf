@@ -54,12 +54,12 @@ void	ft_precision_p(s_args *list)
 	}
 }
 
-void	ft_parse_precision(s_args *list)
+void	ft_parse_precision(s_args *list, char *str)
 {
 	if (list->flags & BINARY)
 		return ;
 	if (list->type == 'f')
-		ft_precision_f(list);
+		ft_precision_f(list, str);
 	else if (list->type == 's' && list->precision != -1 &&
 	ft_strlen(list->string) > list->precision)
 		list->string[list->precision] = '\0';
