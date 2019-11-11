@@ -17,6 +17,7 @@ C_FILES = 	ft_printf.c\
 			ft_precision_f.c\
 			ft_parse_width.c\
 			flags_parsers.c\
+			ft_final_print.c\
 			ft_utf8_coder.c\
 			ft_strchr.c\
 			ft_strlen.c\
@@ -25,6 +26,7 @@ C_FILES = 	ft_printf.c\
 			fts_itoa.c\
 			ft_ftoa.c\
 			ft_errors.c\
+			ft_clear_the_struct.c\
 
 
 HEADER = $(INCLUDES)/ft_printf.h

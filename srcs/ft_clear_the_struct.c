@@ -9,7 +9,9 @@ void	ft_clear_the_struct(s_args **first)
 	while (tmp)
 	{
 		tmp_1 = tmp->next;
-		free(tmp->arg);
+		free(tmp->string);
+		if (tmp->float_list)
+			free(tmp->float_list);
 		free(tmp);
 		tmp = tmp_1;
 	}

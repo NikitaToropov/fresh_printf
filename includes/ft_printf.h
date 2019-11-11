@@ -1,13 +1,9 @@
 #ifndef FT_PRINTF_H
-
 # define FT_PRINTF_H
 
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-# include <locale.h> // dont rmmbr
-# include <stdio.h> // dont rmmbr
 
 //Syntax:
 //	%[parameter][flags][width][.precision][length]type
@@ -82,9 +78,11 @@ char		*ft_itoa_base_upp(unsigned long long n, int base);
 char		*ft_itoa_pointer(unsigned long long n);
 void		ft_ftoa(s_args *list);
 char		*ft_utf8_coder(int sym);
+void		ft_clear_the_struct(s_args **first);
 
 
-
+// final print
+int			ft_final_print(char *format, s_args *first_list);
 
 // convert args from int/float to string
 void		ft_put_bits_in_tne_list(s_args *list);
@@ -94,9 +92,6 @@ void		ft_precision_f(s_args *list);
 void		ft_parse_width(s_args *list);
 void		ft_parse_flags_pl_sp(s_args *list);
 void		ft_parse_flags_hash(s_args *list);
-
-
-
 
 // format string parsing
 int			ft_find_length(char *str, s_args *list);

@@ -106,32 +106,33 @@ int		ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	ft_convert_to_string(first_list);
+	cntr = ft_final_print((char*)format, first_list);
 
 	
-	while (first_list)
-	{
-		printf("\n\"parameter\"         is '%d'\n\n", first_list->order_counter);
+	// while (first_list)
+	// {
+	// 	printf("\n\"parameter\"         is '%d'\n\n", first_list->order_counter);
 
-		printf("\"n_arg_width\"       is '%d'\n", first_list->n_arg_width);
-		printf("\"n_arg_precision\"   is '%d'\n", first_list->n_arg_precision);
-		printf("\"n_arg\"             is '%d'\n\n", first_list->n_arg);
+	// 	printf("\"n_arg_width\"       is '%d'\n", first_list->n_arg_width);
+	// 	printf("\"n_arg_precision\"   is '%d'\n", first_list->n_arg_precision);
+	// 	printf("\"n_arg\"             is '%d'\n\n", first_list->n_arg);
 
-		printf("\"width\"             is '%d'\n", first_list->width);
-		printf("\"precision\"         is '%d'\n\n", first_list->precision);
+	// 	printf("\"width\"             is '%d'\n", first_list->width);
+	// 	printf("\"precision\"         is '%d'\n\n", first_list->precision);
 		
-		printf("\"flags\"             is '%i'\n", first_list->flags);
-		printf("\"length\"            is '%c'\n", first_list->length);
-		printf("\"type\"              is '%c'\n\n", first_list->type);
-		printf("\"int_arg\"           is %lli\n", first_list->int_arg);
-		printf("\"float_arg\"         is %Lf\n", first_list->float_arg);
-		printf("\"string\"           is \n%s|\n", first_list->string);
-		printf("------------------------------------\n");
+	// 	printf("\"flags\"             is '%i'\n", first_list->flags);
+	// 	printf("\"length\"            is '%c'\n", first_list->length);
+	// 	printf("\"type\"              is '%c'\n\n", first_list->type);
+	// 	printf("\"int_arg\"           is %lli\n", first_list->int_arg);
+	// 	printf("\"float_arg\"         is %Lf\n", first_list->float_arg);
+	// 	printf("\"string\"           is \n%s|\n", first_list->string);
+	// 	printf("------------------------------------\n");
 
 
-		first_list = first_list->next;
-	}
+	// 	first_list = first_list->next;
+	// }
 
 
-	// ft_clear_the_struct(&first_list);
-	return (0);
+	ft_clear_the_struct(&first_list);
+	return (cntr);
 }
