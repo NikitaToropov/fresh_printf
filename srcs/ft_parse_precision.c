@@ -26,6 +26,8 @@ void	ft_precision_dioux(s_args *list)
 			list->string[0] = tmp[0];
 		free(tmp);
 	}
+	if (list->precision == 0 && list->int_arg == 0)
+		list->string[0] = '\0';
 }
 
 void	ft_precision_p(s_args *list)

@@ -10,8 +10,8 @@ void	ft_convert_to_string(s_args *list)
 		{
 			list->flags &= ~BINARY;
 			ft_parse_len(list);
-			ft_parse_flags_pl_sp(list);
 			ft_parse_precision(list);
+			ft_parse_flags_pl_sp(list);
 		}
 		ft_parse_flags_hash(list);
 		ft_parse_width(list);
@@ -69,9 +69,7 @@ void	ft_put(s_args *list, int n, unsigned long long i_arg, long double f_arg)
 			list->precision = (int)i_arg;
 		if (list->n_arg == n)
 		{
-			if ((list->type == 'c' || list->type == 's' || list->type == 'p' ||
-			list->type == 'd' || list->type == 'i' || list->type == 'o' ||
-			list->type == 'u' || list->type == 'x' || list->type == 'X'))
+			if (ft_slct_type(list, n) == 'i')
 				list->int_arg = i_arg;
 			else
 				list->float_arg = f_arg;
@@ -84,16 +82,15 @@ int		ft_printf(const char *format, ...)
 {
 	s_args					*first_list;
 	va_list					ap;
-	int						last_arg;
 	int						cntr;
 	char					arg_type;
 
 	first_list = ft_format_string_parse((char*)format);
-	last_arg = ft_find_latest_arg(first_list);
 	cntr = 1;
 	va_start(ap, format);
-	while (cntr <= last_arg && (arg_type = ft_slct_type(first_list, cntr)))
+	while (cntr)
 	{
+		arg_type = ft_slct_type(first_list, cntr)
 		if (arg_type == 'i')
 			ft_put(first_list, cntr, va_arg(ap, long int), 0);
 		else if (arg_type == 'f')
@@ -101,38 +98,15 @@ int		ft_printf(const char *format, ...)
 		else if (arg_type == 'F')
 			ft_put(first_list, cntr, 0, va_arg(ap, long double));
 		else
-			ft_errors(ARG_OMITTED);
+			break;
 		cntr++;
 	}
+	ft_convert_to_string(first_list);
+	ft_string_modifying(first_list);
 	va_end(ap);
 	ft_convert_to_string(first_list);
-	cntr = ft_final_print((char*)format, first_list);
-
-	
-	// while (first_list)
-	// {
-	// 	printf("\n\"parameter\"         is '%d'\n\n", first_list->order_counter);
-
-	// 	printf("\"n_arg_width\"       is '%d'\n", first_list->n_arg_width);
-	// 	printf("\"n_arg_precision\"   is '%d'\n", first_list->n_arg_precision);
-	// 	printf("\"n_arg\"             is '%d'\n\n", first_list->n_arg);
-
-	// 	printf("\"width\"             is '%d'\n", first_list->width);
-	// 	printf("\"precision\"         is '%d'\n\n", first_list->precision);
-		
-	// 	printf("\"flags\"             is '%i'\n", first_list->flags);
-	// 	printf("\"length\"            is '%c'\n", first_list->length);
-	// 	printf("\"type\"              is '%c'\n\n", first_list->type);
-	// 	printf("\"int_arg\"           is %lli\n", first_list->int_arg);
-	// 	printf("\"float_arg\"         is %Lf\n", first_list->float_arg);
-	// 	printf("\"string\"           is \n%s|\n", first_list->string);
-	// 	printf("------------------------------------\n");
-
-
-	// 	first_list = first_list->next;
-	// }
-
-
+	// cntr = ft_final_print((char*)format, first_list);
+	printf("counter is - %i\n", cntr);
 	ft_clear_the_struct(&first_list);
 	return (cntr);
 }

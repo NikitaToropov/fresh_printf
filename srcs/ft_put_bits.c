@@ -56,4 +56,6 @@ void	ft_put_bits_in_tne_list(s_args *list)
 			len = sizeof(int);
 		list->string = ft_put_bits(&(list->int_arg), len);
 	}
+	else
+		list->flags &= ~BINARY;
 }

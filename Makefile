@@ -12,6 +12,7 @@ C_FILES = 	ft_printf.c\
 			ft_format_string_parse.c\
 			fields_parsers.c\
 			ft_put_bits.c\
+			ft_convert_to_string.c\
 			ft_parse_len.c\
 			ft_parse_precision.c\
 			ft_precision_f.c\

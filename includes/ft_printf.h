@@ -5,6 +5,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# include <stdio.h> // dont forget
+
 //Syntax:
 //	%[parameter][flags][width][.precision][length]type
 
@@ -84,9 +86,14 @@ void		ft_clear_the_struct(s_args **first);
 // final print
 int			ft_final_print(char *format, s_args *first_list);
 
-// convert args from int/float to string
+// modifying
+
+
+// convert args from int/float to chars
+void		ft_convert_to_string(s_args *list);
 void		ft_put_bits_in_tne_list(s_args *list);
 void		ft_parse_len(s_args *list);
+
 void		ft_parse_precision(s_args *list);
 void		ft_precision_f(s_args *list);
 void		ft_parse_width(s_args *list);
