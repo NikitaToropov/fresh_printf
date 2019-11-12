@@ -69,36 +69,40 @@ typedef struct							t_args
 // secondary functions
 void		ft_errors(int code);
 
-char		*ft_strdup(const char *s1);
-char		*ft_strchr(const char *s, int c);
-int			ft_strlen(const char *s);
+char			*ft_strdup(const char *s1);
+char			*ft_strchr(const char *s, int c);
+unsigned int	ft_strlen(const char *s);
 
-int			ft_atoi(const char *str);
-char		*ft_itoa(long long n);
-char		*ft_itoa_base(unsigned long long n, int base);
-char		*ft_itoa_base_upp(unsigned long long n, int base);
-char		*ft_itoa_pointer(unsigned long long n);
-void		ft_ftoa(s_args *list);
-char		*ft_utf8_coder(int sym);
-void		ft_clear_the_struct(s_args **first);
+int				ft_atoi(const char *str);
+char			*ft_itoa(long long n);
+char			*ft_itoa_base(unsigned long long n, int base);
+char			*ft_itoa_base_upp(unsigned long long n, int base);
+char			*ft_itoa_pointer(unsigned long long n);
+void			ft_ftoa(s_args *list);
+char			*ft_utf8_coder(int sym);
+void			ft_clear_the_struct(s_args **first);
 
 
 // final print
 int			ft_final_print(char *format, s_args *first_list);
 
 // modifying
+void		ft_string_modifying(s_args *list);
+void		ft_parse_precision(s_args *list, char *str);
+void		ft_precision_f(s_args *list, char *str);
+
+
+void		ft_copy(char *old_str, char *new_str);
+void		ft_shift_right_by(char *str, unsigned int limiter);
+void		ft_fill_by_while(char *str, char n, unsigned int limiter);
+
+
 
 
 // convert args from int/float to chars
 void		ft_convert_to_string(s_args *list);
 void		ft_put_bits_in_tne_list(s_args *list);
 void		ft_parse_len(s_args *list);
-
-void		ft_parse_precision(s_args *list);
-void		ft_precision_f(s_args *list);
-void		ft_parse_width(s_args *list);
-void		ft_parse_flags_pl_sp(s_args *list);
-void		ft_parse_flags_hash(s_args *list);
 
 // format string parsing
 int			ft_find_length(char *str, s_args *list);

@@ -12,7 +12,7 @@ void	ft_copy(char *old_str, char *new_str)
 	}
 }
 
-void	ft_fill_by_while(char *str, char n, unsigned long long limiter)
+void	ft_fill_by_while(char *str, char n, unsigned int limiter)
 {
 	unsigned long long		i;
 
@@ -21,7 +21,7 @@ void	ft_fill_by_while(char *str, char n, unsigned long long limiter)
 		str[i--] = n;
 }
 
-void	shift_right_by(char *str, unsigned long long limiter)
+void	ft_shift_right_by(char *str, unsigned int limiter)
 {
 	unsigned long long		back_c;
 
@@ -33,11 +33,23 @@ void	shift_right_by(char *str, unsigned long long limiter)
 	}
 }
 
-char	*ft_modifying(s_args *list, char *new_str)
+void	ft_shift_left_by(char *str, unsigned int limiter)
+{
+	unsigned long long		back_c;
+
+	back_c = ft_strlen(str);
+	while(back_c <= 0)
+	{
+		str[back_c + limiter] = str[back_c];
+		back_c--;
+	}
+}
+
+void	ft_modifying(s_args *list, char *new_str)
 {
 	ft_copy(list->string, new_str);
-	ft_parse_precision(list, new_str);
-
+	if (!(list->flags & BINARY))
+		ft_parse_precision(list, new_str);
 	
 }
 
@@ -54,7 +66,7 @@ void	ft_string_modifying(s_args *list)
 			len += (unsigned long long int)list->precision;
 		if (list->width != -1)
 			len += (unsigned long long int)list->width;
-		if (!(new_str = (char*)malloc(sizeof(char) * len)));
+		if (!(new_str = (char*)malloc(sizeof(char) * len)))
 			ft_errors(MEM_IS_NOT_ALLOC);
 		ft_modifying(list, new_str);
 		free(list->string);

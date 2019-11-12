@@ -52,7 +52,7 @@ char		*ft_parse_format_placeholder(char *str, s_args *list)
 		str += ft_find_precision(str, list);
 		str += ft_find_length(str, list);
 		if (tmp_list == str)
-			ft_errors(UNKNOWN_CHAR);
+			str++;
 	}
 	list->n_arg = list->order_counter;
 	list->order_counter += 1;

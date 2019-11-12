@@ -8,12 +8,8 @@
 
 int		main(void)
 {	
-	// printf("%%.0i\n", 0);
-	// ft_printf("%%.0i\n", 0);
-	
-	// printf("%.0i\n", 0);
-	// printf("%.i\n", 0);
-	ft_printf("%.i\n", 0);
-	// ft_printf("%.0i\n", 0);
+	// ft_printf("%.10f\n", -3.4);
+	printf("%.4i\n", 123);
+	ft_printf("%.4i", 123);
 	return (0);
 }

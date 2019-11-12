@@ -6,35 +6,12 @@ void	ft_convert_to_string(s_args *list)
 	{
 		if (list->flags & BINARY)
 			ft_put_bits_in_tne_list(list);
-		if (!(list->string))
-		{
-			list->flags &= ~BINARY;
+		if (list->type != '%' && !(list->string))
 			ft_parse_len(list);
-			ft_parse_precision(list);
-			ft_parse_flags_pl_sp(list);
-		}
-		ft_parse_flags_hash(list);
-		ft_parse_width(list);
+		else
+			list->string = ft_strdup("%");
 		list = list->next;
 	}
-}
-
-int		ft_find_latest_arg(s_args *list)
-{
-	int		biggest;
-
-	biggest = 0;
-	while (list)
-	{
-		if (biggest < list->n_arg_width)
-			biggest = list->n_arg_width;
-		if (biggest < list->n_arg_precision)
-			biggest = list->n_arg_precision;
-		if (biggest < list->n_arg)
-			biggest = list->n_arg;
-		list = list->next;
-	}
-	return (biggest);
 }
 
 char	ft_slct_type(s_args *list, int counter_arg)
@@ -90,7 +67,7 @@ int		ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (cntr)
 	{
-		arg_type = ft_slct_type(first_list, cntr)
+		arg_type = ft_slct_type(first_list, cntr);
 		if (arg_type == 'i')
 			ft_put(first_list, cntr, va_arg(ap, long int), 0);
 		else if (arg_type == 'f')
@@ -101,12 +78,11 @@ int		ft_printf(const char *format, ...)
 			break;
 		cntr++;
 	}
-	ft_convert_to_string(first_list);
-	ft_string_modifying(first_list);
 	va_end(ap);
 	ft_convert_to_string(first_list);
-	// cntr = ft_final_print((char*)format, first_list);
-	printf("counter is - %i\n", cntr);
+	ft_string_modifying(first_list);
+	cntr = ft_final_print((char*)format, first_list);
+	// printf("counter is - %i\n", cntr);
 	ft_clear_the_struct(&first_list);
 	return (cntr);
 }

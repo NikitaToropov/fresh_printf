@@ -1,82 +1,80 @@
 #include "ft_printf.h"
 
-void	ft_add_over_f(s_args *list, int counter)
+int		ft_add_carry(char *str)
 {
-	while (counter >= 0 && list->string[counter] != '-')
-	{
-		list->string[counter + 1] = list->string[counter];
-		counter--;
-	}
-	list->string[counter + 1] = '1';
-}
+	long int		countdown;
+	int				carry;
 
-void	ft_reduce_f(s_args *list, int new)
-{
-	int		over;
-	int		counter;
-
-	over = 0;
-	if ((list->precision && list->string[new] >= '5') ||
-	(list->precision == 0 && list->string[new + 1] >= '5'))
-		over = 1;
-	list->string[new] = '\0';
-	counter = new - 1;
-	while (counter >= 0 && over && list->string[counter] != '-')
+	countdown = ft_strlen(str) - 1;
+	carry = 1;
+	while (countdown >= 0 && carry && str[countdown] != '-')
 	{
-		if (list->string[counter] == '.')
-			counter--;
-		if ((list->string[counter] += 1) > '9')
-			list->string[counter--] -= 10;
+		if (str[countdown] == '.')
+			countdown--;
+		if ((str[countdown] += 1) > '9')
+			str[countdown] = str[countdown] - 10;
 		else
-			over = 0;
+			carry = 0;
+		countdown--;
 	}
-	if (over)
-		ft_add_over_f(list, new);
-	if (list->string[0] == '-' && list->string[1] == '0')
+	return (carry);
+}
+
+void	ft_fill_with_carry(char *str)
+{
+	if (ft_add_carry(str))
 	{
-		list->string[0] = '0';
-		list->string[1] = '\0';
+		if (str[0] == '-')
+		{
+			ft_shift_right_by(&str[1], 1);
+			str[1] = 1;
+		}
+		else
+		{
+			ft_shift_right_by(str, 1);
+			str[0] = 1;
+		}
 	}
 }
 
-void	ft_lengthen_f(s_args *list, int new)
+void	ft_accuracy_reduction(s_args *list, char *str, char *dot)
 {
-	char	*tmp;
-	int		counter;
+	int		carry;
 
-	tmp = list->string;
-	if (!(list->string = (char*)malloc(sizeof(char) * (new + 1))))
-		ft_errors(MEM_IS_NOT_ALLOC);
-	list->string[new] = '\0';
-	counter = 0;
-	while (tmp[counter])
+	carry = 0;
+	if ((list->precision && dot[list->precision + 1] >= '5') ||
+	(!(list->precision) && dot[1] >= '5'))
+		carry = 1;
+	dot[list->precision + 1] = '\0';
+	if (carry)
+		ft_fill_with_carry(str);
+	if (!(list->precision) && list->float_arg < 0 && str[1] == '0')
 	{
-		list->string[counter] = tmp[counter];
-		counter++;
+		str[0] = '0';
+		str[1] = '.';
+		str[2] = '\0';
 	}
-	while (counter < new)
-		list->string[counter++] = '0';
-	free(tmp);
+	if (!(list->flags & HASH) && !(list->precision))
+	{
+		dot = ft_strchr(str, '.');
+		*dot = '\0';
+	}
 }
 
 void	ft_precision_f(s_args *list, char *str)
 {
-	char	*frac;
-	int		old;
-	int		new;
+	char	*dot;
+	int		old_prec;
 
 	if (list->precision == -1)
 		list->precision = 6;
-	frac = ft_strchr(list->string, '.');
-	old = ft_strlen(list->string);
-	new = frac - list->string + list->precision;
-	if (list->precision != 0)
-		new++;
-	if (old == new || list->float_arg != list->float_arg ||
-	list->float_arg == (list->float_arg + list->float_arg))
-		return ;
-	else if (old > new)
-		ft_reduce_f(list, new);
-	else
-		ft_lengthen_f(list, new);
+	dot = ft_strchr(str, '.');
+	old_prec = ft_strlen(dot) - 1;
+	if (old_prec < list->precision)
+	{
+		ft_fill_by_while(&dot[old_prec + 1], '0', (list->precision - old_prec));
+		dot[list->precision + 1] = '\0';
+	}
+	else if (old_prec > list->precision)
+		ft_accuracy_reduction(list, str, dot);
 }

@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int		ft_strlen(const char *s)
+unsigned int		ft_strlen(const char *s)
 {
 	char	*t;
 
