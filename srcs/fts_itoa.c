@@ -25,12 +25,12 @@ char			*ft_itoa(long long n)
 	len += ft_uns_len(number, 10);
 	if (!(result = (char*)malloc(sizeof(char) * (len + 1))))
 		ft_errors(MEM_IS_NOT_ALLOC);
-	result[len--] = '\0';
+	result[len] = '\0';
 	if (n < 0)
 		result[0] = '-';
 	while (number)
 	{
-		result[len--] = number % 10 + '0';
+		result[--len] = number % 10 + '0';
 		number /= 10;
 	}
 	return (result);

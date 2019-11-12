@@ -72,6 +72,9 @@ void		ft_errors(int code);
 char			*ft_strdup(const char *s1);
 char			*ft_strchr(const char *s, int c);
 unsigned int	ft_strlen(const char *s);
+void			*ft_memalloc(size_t size);
+
+
 
 int				ft_atoi(const char *str);
 char			*ft_itoa(long long n);
@@ -84,36 +87,32 @@ void			ft_clear_the_struct(s_args **first);
 
 
 // final print
-int			ft_final_print(char *format, s_args *first_list);
+int				ft_final_print(char *format, s_args *first_list);
 
 // modifying
-void			ft_string_modifying(s_args *list);
-void			ft_parse_precision(s_args *list, char *str);
-void			ft_precision_f(s_args *list, char *str);
-void			ft_parse_flag_h(s_args *list, char *str);
-// void			ft_parse_flag_p(s_args *list, char *str);
 
 
-void		ft_copy(char *old_str, char *new_str);
-void		ft_shift_right_by(char *str, unsigned int limiter);
-void		ft_fill_by_while(char *str, char n, unsigned int limiter);
+
+void			ft_copy(char *old_str, char *new_str);
+void			ft_shift_right_by(char *str, unsigned int limiter);
+void			ft_fill_by_while(char *str, char n, unsigned int limiter);
 
 
 
 
 // convert args from int/float to chars
-void		ft_convert_to_string(s_args *list);
-void		ft_put_bits_in_tne_list(s_args *list);
-void		ft_parse_len(s_args *list);
+void			ft_convert_to_string(s_args *list);
+void			ft_put_bits_in_tne_list(s_args *list);
+void			ft_parse_len(s_args *list);
 
 // format string parsing
-int			ft_find_length(char *str, s_args *list);
-int			ft_find_precision(char *str, s_args *list);
-int			ft_find_width(char *str, s_args *list);
-int			ft_find_flag(char str, s_args *list);
-int			ft_find_parameter(char *str, s_args *list);
-s_args		*ft_format_string_parse(char *str);
+int				ft_find_length(char *str, s_args *list);
+int				ft_find_precision(char *str, s_args *list);
+int				ft_find_width(char *str, s_args *list);
+int				ft_find_flag(char str, s_args *list);
+int				ft_find_parameter(char *str, s_args *list);
+s_args			*ft_format_string_parse(char *str);
 
-int			ft_printf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 
 #endif

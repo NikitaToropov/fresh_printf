@@ -80,9 +80,7 @@ int		ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	ft_convert_to_string(first_list);
-	ft_string_modifying(first_list);
 	cntr = ft_final_print((char*)format, first_list);
-	// printf("counter is - %i\n", cntr);
 	ft_clear_the_struct(&first_list);
 	return (cntr);
 }

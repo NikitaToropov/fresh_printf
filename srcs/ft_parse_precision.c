@@ -4,7 +4,8 @@ void	ft_precision_dioux(s_args *list, char *str)
 {
 	unsigned int	old_len;
 
-	if ((list->type == 'i' || list->type == 'i') && str[0] == '-')
+	list->type &= ~ZERO;
+	if ((list->type == 'i' || list->type == 'd') && str[0] == '-')
 	{
 		old_len = ft_strlen(&str[1]);
 		if (old_len < (unsigned int)list->precision)
@@ -17,7 +18,7 @@ void	ft_precision_dioux(s_args *list, char *str)
 	{
 		old_len = ft_strlen(str);
 		if (list->precision == 0 && list->int_arg == 0)
-			str[0] = '0';
+			str[0] = '\0';
 		else if (old_len < (unsigned int)list->precision)
 		{
 			ft_shift_right_by(str, (list->precision - old_len));

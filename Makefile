@@ -13,15 +13,12 @@ C_FILES = 	ft_printf.c\
 			fields_parsers.c\
 			ft_put_bits.c\
 			ft_parse_len.c\
-			ft_string_modifying.c\
-			ft_parse_precision.c\
-			ft_precision_f.c\
-			ft_parsers_flags.c\
 			ft_final_print.c\
 			ft_utf8_coder.c\
 			ft_strchr.c\
 			ft_strlen.c\
 			ft_strdup.c\
+			ft_memalloc.c\
 			ft_atoi.c\
 			fts_itoa.c\
 			ft_ftoa.c\

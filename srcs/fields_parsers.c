@@ -41,7 +41,9 @@ int		ft_find_flag(char symbol, s_args *list)
 	symbol == '-' || symbol == ' ' ||
 	symbol == '+' || symbol == '\'' ||
 	symbol == 'b')
+	{
 		return (1);
+	}
 	return (0);
 }
 

@@ -24,9 +24,15 @@ void	ft_parse_flag_h(s_args *list, char *str)
 	}
 }
 
-void	ft_parse_flag_p(s_args *list, char *str)
+void	ft_parse_flag_ps(s_args *list, char *str)
 {
-	if (list->type & PLUS)
+	if ((list->type == 'd' || list->type == 'i' || list->type == 'f') &&
+	(list->flags & PLUS || list->flags & SPACE) && *str != '-')
+	{
+		ft_shift_right_by(str, 1);
+		if (list->flags & PLUS)
+			str[0] = '+';
+		else
+			str[0] = ' ';
+	}
 }
-
-
