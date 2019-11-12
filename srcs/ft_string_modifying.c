@@ -2,7 +2,7 @@
 
 void	ft_copy(char *old_str, char *new_str)
 {
-	unsigned long long		i;
+	long long int		i;
 
 	i = 0;
 	while (old_str[i])
@@ -14,28 +14,29 @@ void	ft_copy(char *old_str, char *new_str)
 
 void	ft_fill_by_while(char *str, char n, unsigned int limiter)
 {
-	unsigned long long		i;
+	long int		i;
 
 	i = 0;
 	while (i < limiter)
-		str[i--] = n;
+		str[i++] = n;
 }
 
 void	ft_shift_right_by(char *str, unsigned int limiter)
 {
-	unsigned long long		back_c;
+	long int		back_c;
 
 	back_c = ft_strlen(str);
-	while(back_c <= 0)
+	while(back_c >= 0)
 	{
 		str[back_c + limiter] = str[back_c];
 		back_c--;
 	}
+
 }
 
 void	ft_shift_left_by(char *str, unsigned int limiter)
 {
-	unsigned long long		back_c;
+	long int		back_c;
 
 	back_c = ft_strlen(str);
 	while(back_c <= 0)
@@ -49,8 +50,10 @@ void	ft_modifying(s_args *list, char *new_str)
 {
 	ft_copy(list->string, new_str);
 	if (!(list->flags & BINARY))
+	{
 		ft_parse_precision(list, new_str);
-	
+		ft_parse_flag_h(list, new_str);
+	}
 }
 
 void	ft_string_modifying(s_args *list)
@@ -71,6 +74,6 @@ void	ft_string_modifying(s_args *list)
 		ft_modifying(list, new_str);
 		free(list->string);
 		list->string = new_str;
-		list = list-> next;
+		list = list->next;
 	}
 }

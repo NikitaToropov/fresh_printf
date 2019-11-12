@@ -16,6 +16,7 @@ C_FILES = 	ft_printf.c\
 			ft_string_modifying.c\
 			ft_parse_precision.c\
 			ft_precision_f.c\
+			ft_parsers_flags.c\
 			ft_final_print.c\
 			ft_utf8_coder.c\
 			ft_strchr.c\

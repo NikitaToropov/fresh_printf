@@ -8,8 +8,7 @@
 
 int		main(void)
 {	
-	// ft_printf("%.10f\n", -3.4);
-	printf("%.4i\n", 123);
-	ft_printf("%.4i", 123);
+	printf("%.10i\n", -15);
+	ft_printf("%.10i\n", -15);
 	return (0);
 }

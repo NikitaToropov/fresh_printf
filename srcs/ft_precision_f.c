@@ -48,12 +48,6 @@ void	ft_accuracy_reduction(s_args *list, char *str, char *dot)
 	dot[list->precision + 1] = '\0';
 	if (carry)
 		ft_fill_with_carry(str);
-	if (!(list->precision) && list->float_arg < 0 && str[1] == '0')
-	{
-		str[0] = '0';
-		str[1] = '.';
-		str[2] = '\0';
-	}
 	if (!(list->flags & HASH) && !(list->precision))
 	{
 		dot = ft_strchr(str, '.');

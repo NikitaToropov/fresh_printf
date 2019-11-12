@@ -87,9 +87,11 @@ void			ft_clear_the_struct(s_args **first);
 int			ft_final_print(char *format, s_args *first_list);
 
 // modifying
-void		ft_string_modifying(s_args *list);
-void		ft_parse_precision(s_args *list, char *str);
-void		ft_precision_f(s_args *list, char *str);
+void			ft_string_modifying(s_args *list);
+void			ft_parse_precision(s_args *list, char *str);
+void			ft_precision_f(s_args *list, char *str);
+void			ft_parse_flag_h(s_args *list, char *str);
+// void			ft_parse_flag_p(s_args *list, char *str);
 
 
 void		ft_copy(char *old_str, char *new_str);
