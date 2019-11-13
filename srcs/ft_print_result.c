@@ -1,5 +1,12 @@
 #include "ft_printf.h"
 
+
+void	ft_print_arg(t_args *list, size_t *counter)
+{
+	if (list->type)
+		ft_parse_len(list);
+}
+
 int		ft_print_result(const char *str, t_args **first)
 {
 	int			counter;
@@ -13,6 +20,7 @@ int		ft_print_result(const char *str, t_args **first)
 	{
 		if (str[i] == '%')
 		{
+			ft_print_arg(list, &counter);
 			list = list->next;
 		}
 		else

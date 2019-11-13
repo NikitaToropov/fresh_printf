@@ -8,7 +8,7 @@
 
 int		main(void)
 {	
-	// printf("%.123$i");
-	ft_printf("% 14.5s%6$1234% %d %");
+	// printf("%.8f", 3.2/0);
+	ft_printf("%12.4s%+ 0.f%", "1st", 3.5, 8562);
 	return (0);
 }

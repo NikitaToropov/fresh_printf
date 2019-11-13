@@ -1,5 +1,15 @@
 #include "ft_printf.h"
 
+static void		ft_convert_args(t_args *list)
+{
+	while (list)
+	{
+		ft_parse_len(list);
+		list = list->next;
+	}
+}
+
+
 static void			ft_put_arg(t_args *list, size_t n, unsigned long long i_arg, long double f_arg)
 {
 	while (list)
@@ -23,8 +33,8 @@ static char			ft_find_arg_type(t_args *list, size_t n)
 {
 	while (list)
 	{
-		if (list->num_width == n || list->num_width == n ||
-		(list->num_arg = n && ft_strchr("diouxXcsp", list->type)))
+		if (list->num_width == n || list->num_precision == n ||
+		(list->num_arg == n && ft_strchr("diouxXcsp", list->type)))
 			return ('i');
 		else if (list->num_arg == n && list->type == 'f' && list->length == 'D')
 			return ('F');
@@ -78,32 +88,38 @@ int					ft_printf(const char *format, ...)
 		counter++;
 	}
 	va_end(ap);
-	// while (first_list)
-	// {
-	// 	printf("\n\"order_counter\"   is '%zu'\n\n", first_list->order_counter);
+	ft_convert_args(first_list);
 
-	// 	printf("\"num_width\"         is '%zu'\n", first_list->num_width);
-	// 	printf("\"num_precision\"     is '%zu'\n", first_list->num_precision);
-	// 	printf("\"num_arg\"           is '%zu'\n\n", first_list->num_arg);
+	while (first_list)
+	{
+		printf("\n\"order_counter\"   is '%zu'\n\n", first_list->order_counter);
 
-	// 	printf("\"width\"             is '%i'\n", first_list->width);
-	// 	printf("\"precision\"         is '%i'\n\n", first_list->precision);
+		printf("\"num_width\"         is '%zu'\n", first_list->num_width);
+		printf("\"num_precision\"     is '%zu'\n", first_list->num_precision);
+		printf("\"num_arg\"           is '%zu'\n\n", first_list->num_arg);
+
+		printf("\"width\"             is '%i'\n", first_list->width);
+		printf("\"precision\"         is '%i'\n\n", first_list->precision);
 		
-	// 	printf("\"flags\"             is '%i'\n", first_list->flags);
-	// 	printf("\"length\"            is '%c'\n", first_list->length);
-	// 	printf("\"type\"              is '%c'\n\n", first_list->type);
+		printf("\"flags\"             is '%i'\n", first_list->flags);
+		printf("\"length\"            is '%c'\n", first_list->length);
+		printf("\"type\"              is '%c'\n\n", first_list->type);
 		
-	// 	printf("\"string\"            is '%s'\n", first_list->string);
-	// 	printf("\"str_len\"            is '%zu'\n", first_list->str_len);
-	// 	printf("\"sign\"              is '%c'\n", first_list->sign);
-	// 	printf("\"pass_start\"        is '%zu'\n", first_list->pass_start);
-	// 	printf("\"pass_length\"       is '%zu'\n", first_list->pass_length);
+		printf("\"float_arg\"         is '%Lf'\n", first_list->float_arg);
+		printf("\"float_arg\"         is '%lld'\n\n", first_list->int_arg);
+		
+		printf("\"string\"            is '%s'\n", first_list->string);
+		printf("\"str_len\"            is '%zu'\n", first_list->str_len);
+		printf("\"sign\"              is '%c'\n", first_list->sign);
+		printf("\"pass_start\"        is '%zu'\n", first_list->pass_start);
+		printf("\"pass_length\"       is '%zu'\n", first_list->pass_length);
 		
 
-	// 	printf("------------------------------------\n");
+		printf("------------------------------------\n");
 
 
-	// 	first_list = first_list->next;
-	// }
-	return (ft_print_result(&first_list));
+		first_list = first_list->next;
+	}
+	// return (ft_print_result(format, &first_list));
+	return (1);
 }

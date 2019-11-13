@@ -69,7 +69,7 @@ char	*ft_ld_str(int s_dig, int i_len, int f_len, long double ld)
 	if (ld < 0)
 		len++;
 	if (!(str = malloc(sizeof(char) * (len + 1))))
-		ft_errors(MEM_IS_NOT_ALLOC);
+		exit(1);
 	str[len] = '\0';
 	if (ld < 0)
 	{
@@ -85,7 +85,7 @@ char	*ft_ld_str(int s_dig, int i_len, int f_len, long double ld)
 	return (str);
 }
 
-void	ft_ftoa(s_args *list)
+void	ft_ftoa(t_args *list)
 {
 	int					int_len;
 	int					frac_len;

@@ -78,9 +78,22 @@ char		*ft_strdup(const char *s1);
 int			ft_is_digit(int c);
 int			ft_atoi(const char *str);
 
+char			*ft_itoa(long long n);
+
+char			*ft_itoa_base(unsigned long long n, int base);
+char			*ft_itoa_base_upp(unsigned long long n, int base);
+char			*ft_itoa_pointer(unsigned long long n);
+void			ft_ftoa(t_args *list);
+char			*ft_utf8_coder(int sym);
+
+// final print
+// int				ft_print_result(const char *str, t_args **first);
+
 
 // format string parsing
 t_args			*ft_parse_format(const char *str);
+void			ft_parse_len(t_args *list);
+
 // fields parsers
 size_t		ft_find_parameter(char *str, t_args *list);
 size_t		ft_find_flag(char c, t_args *list);
