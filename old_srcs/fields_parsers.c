@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-size_t		ft_find_parameter(char *str, t_args *list)
+int		ft_find_parameter(char *str, s_args *list)
 {
 	char	*tmp_str;
 
@@ -17,32 +17,37 @@ size_t		ft_find_parameter(char *str, t_args *list)
 	return (0);
 }
 
-size_t		ft_find_flag(char c, t_args *list)
+int		ft_find_flag(char symbol, s_args *list)
 {
-	if (c == '#')
+	if (symbol == '#')
 		list->flags |= HASH;
-	else if (c == '0')
+	else if (symbol == '0')
 		list->flags |= ZERO;
-	else if (c == '-')
+	else if (symbol == '-')
 		list->flags |= MINUS;
-	else if (c == ' ')
+	else if (symbol == ' ')
 		list->flags |= SPACE;
-	else if (c == '+')
+	else if (symbol == '+')
 		list->flags |= PLUS;
-	else if (c == '\'')
+	else if (symbol == '\'')
 		list->flags |= APOSTROPHE;
-	else if (c == 'b')
+	else if (symbol == 'b')
 		list->flags |= BINARY;
 	if (list->flags & MINUS)
 		list->flags &= (~ZERO);
 	if (list->flags & PLUS)
 		list->flags &= (~SPACE);
-	if (c && ft_strchr("#0-+' ", c))
+	if (symbol == '#' || symbol == '0' ||
+	symbol == '-' || symbol == ' ' ||
+	symbol == '+' || symbol == '\'' ||
+	symbol == 'b')
+	{
 		return (1);
+	}
 	return (0);
 }
 
-size_t		ft_find_width(char *str, t_args *list)
+int		ft_find_width(char *str, s_args *list)
 {
 	char	*tmp_str;
 
@@ -50,12 +55,12 @@ size_t		ft_find_width(char *str, t_args *list)
 	{
 		if ((str[1] >= '1' && str[1] <= '9') && str[2] == '$')
 		{
-			list->num_width = (int)(str[1] - '0');
+			list->n_arg_width = (int)(str[1] - '0');
 			return (3);
 		}
 		else
 		{
-			list->num_width = list->order_counter;
+			list->n_arg_width = list->order_counter;
 			list->order_counter += 1;
 			return (1);
 		}
@@ -66,34 +71,34 @@ size_t		ft_find_width(char *str, t_args *list)
 	if (tmp_str != str)
 	{
 		list->width = ft_atoi(str);
-		list->num_width = 0;
+		list->n_arg_width = 0;
 	}
 	return (tmp_str - str);
 }
 
-size_t		ft_find_precision(char *str, t_args *list)
+int		ft_find_precision(char *str, s_args *list)
 {
 	char	*tmp_str;
 	if (str[0] == '.')
 	{
 		if (str[1] == '*' && (str[2] >= '0' || str[2] <= '9') &&
-		str[3] == '$' && (list->num_precision = str[2] - '0'))
+		str[3] == '$' && (list->n_arg_precision = str[2] - '0'))
 			return (4);
 		if (str[1] == '*')
 		{
-			list->num_precision = list->order_counter;
+			list->n_arg_precision = list->order_counter;
 			list->order_counter += 1;
 			return (2);
 		}
 		else if (str[1] == '0')
 		{
-			list->num_precision = 0;
+			list->n_arg_precision = 0;
 			list->precision = 0;
 			return (2);
 		}
 		else if (str[1] >= '1' && str[1] <= '9' && (tmp_str = &str[1]))
 		{
-			list->num_precision = 0;
+			list->n_arg_precision = 0;
 			while (*tmp_str >= '0' && *tmp_str <= '9')
 				tmp_str++;
 			list->precision = ft_atoi(&str[1]);
@@ -108,7 +113,7 @@ size_t		ft_find_precision(char *str, t_args *list)
 	return (0);
 }
 
-size_t		ft_find_length(char *str, t_args *list)
+int		ft_find_length(char *str, s_args *list)
 {
 	if ((str[0] == 'h' && str[1] == 'h') || (str[0] == 'l' && str[1] == 'l'))
 	{

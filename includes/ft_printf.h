@@ -43,75 +43,54 @@ typedef struct							t_float
 	unsigned long long int				significand;
 }										s_float;
 
-typedef struct							t_args
+typedef struct							s_args
 {
-	int									order_counter;
+	size_t								order_counter;
 	
-	int									n_arg_width;
-	int									n_arg_precision;
-	int									n_arg;
+	size_t								num_width;
+	size_t								num_precision;
+	size_t								num_arg;
 
 	int									width;
 	int									precision;
-	
+
 	unsigned long long int				int_arg;
 	long double							float_arg;
-	s_float								*float_list;
+	// s_float								*float_list;
 
 	char								flags;
 	char								length;
 	char								type;
 	
 	char								*string;
-	struct t_args						*next;
-}										s_args;
+	size_t								str_len;
+	char								sign;
+	size_t								pass_start;
+	size_t								pass_length;
+	struct s_args						*next;
+}										t_args;
 
 // secondary functions
-void		ft_errors(int code);
+char		*ft_strchr(const char *s, int c);
+size_t		ft_strlen(const char *s);
+void		*ft_memalloc(size_t size);
+char		*ft_strdup(const char *s1);
+int			ft_is_digit(int c);
+int			ft_atoi(const char *str);
 
-char			*ft_strdup(const char *s1);
-char			*ft_strchr(const char *s, int c);
-unsigned int	ft_strlen(const char *s);
-void			*ft_memalloc(size_t size);
-
-
-
-int				ft_atoi(const char *str);
-char			*ft_itoa(long long n);
-char			*ft_itoa_base(unsigned long long n, int base);
-char			*ft_itoa_base_upp(unsigned long long n, int base);
-char			*ft_itoa_pointer(unsigned long long n);
-void			ft_ftoa(s_args *list);
-char			*ft_utf8_coder(int sym);
-void			ft_clear_the_struct(s_args **first);
-
-
-// final print
-int				ft_final_print(char *format, s_args *first_list);
-
-// modifying
-
-
-
-void			ft_copy(char *old_str, char *new_str);
-void			ft_shift_right_by(char *str, unsigned int limiter);
-void			ft_fill_by_while(char *str, char n, unsigned int limiter);
-
-
-
-
-// convert args from int/float to chars
-void			ft_convert_to_string(s_args *list);
-void			ft_put_bits_in_tne_list(s_args *list);
-void			ft_parse_len(s_args *list);
 
 // format string parsing
-int				ft_find_length(char *str, s_args *list);
-int				ft_find_precision(char *str, s_args *list);
-int				ft_find_width(char *str, s_args *list);
-int				ft_find_flag(char str, s_args *list);
-int				ft_find_parameter(char *str, s_args *list);
-s_args			*ft_format_string_parse(char *str);
+t_args			*ft_parse_format(const char *str);
+// fields parsers
+size_t		ft_find_parameter(char *str, t_args *list);
+size_t		ft_find_flag(char c, t_args *list);
+size_t		ft_find_width(char *str, t_args *list);
+size_t		ft_find_precision(char *str, t_args *list);
+size_t		ft_find_length(char *str, t_args *list);
+
+
+
+
 
 int				ft_printf(const char *format, ...);
 

@@ -1,86 +1,39 @@
 #include "ft_printf.h"
 
-void	ft_convert_to_string(s_args *list)
-{
-	while (list)
-	{
-		if (list->flags & BINARY)
-			ft_put_bits_in_tne_list(list);
-		if (list->type != '%' && !(list->string))
-			ft_parse_len(list);
-		else
-			list->string = ft_strdup("%");
-		list = list->next;
-	}
-}
-
-char	ft_slct_type(s_args *list, int counter_arg)
-{
-	while (list)
-	{
-		if (list->n_arg_width == counter_arg ||
-		list->n_arg_precision == counter_arg ||
-		(list->n_arg == counter_arg &&
-		(list->type == 'c' || list->type == 's' || list->type == 'p' ||
-		list->type == 'd' || list->type == 'i' || list->type == 'o' ||
-		list->type == 'u' || list->type == 'x' || list->type == 'X')))
-			return ('i');
-		if (list->n_arg == counter_arg && list->type == 'f' &&
-		list->length != LONG_DOUBLE)
-			return ('f');
-		if (list->n_arg == counter_arg && list->type == 'f' &&
-		list->length == LONG_DOUBLE)
-			return ('F');
-		list = list->next;
-	}
-	return ('e');
-}
-
-void	ft_put(s_args *list, int n, unsigned long long i_arg, long double f_arg)
-{
-	while (list)
-	{
-		if (list->n_arg_width == n && list->width == -1)
-			list->width = (int)i_arg;
-		if (list->n_arg_precision == n && list->precision == -1)
-			list->precision = (int)i_arg;
-		if (list->n_arg == n)
-		{
-			if (ft_slct_type(list, n) == 'i')
-				list->int_arg = i_arg;
-			else
-				list->float_arg = f_arg;
-		}
-		list = list->next;
-	}
-}
-
 int		ft_printf(const char *format, ...)
 {
-	s_args					*first_list;
-	va_list					ap;
-	int						cntr;
-	char					arg_type;
+	t_args					*first_list;
+	// va_list					ap;
 
-	first_list = ft_format_string_parse((char*)format);
-	cntr = 1;
-	va_start(ap, format);
-	while (cntr)
+	first_list = ft_parse_format(format);
+	// va_start(ap, format);
+	// va_end(ap);
+	while (first_list)
 	{
-		arg_type = ft_slct_type(first_list, cntr);
-		if (arg_type == 'i')
-			ft_put(first_list, cntr, va_arg(ap, long int), 0);
-		else if (arg_type == 'f')
-			ft_put(first_list, cntr, 0, (long double)va_arg(ap, double));
-		else if (arg_type == 'F')
-			ft_put(first_list, cntr, 0, va_arg(ap, long double));
-		else
-			break;
-		cntr++;
+		printf("\n\"order_counter\"   is '%zu'\n\n", first_list->order_counter);
+
+		printf("\"num_width\"         is '%zu'\n", first_list->num_width);
+		printf("\"num_precision\"     is '%zu'\n", first_list->num_precision);
+		printf("\"num_arg\"           is '%zu'\n\n", first_list->num_arg);
+
+		printf("\"width\"             is '%i'\n", first_list->width);
+		printf("\"precision\"         is '%i'\n\n", first_list->precision);
+		
+		printf("\"flags\"             is '%i'\n", first_list->flags);
+		printf("\"length\"            is '%c'\n", first_list->length);
+		printf("\"type\"              is '%c'\n\n", first_list->type);
+		
+		printf("\"string\"            is '%s'\n", first_list->string);
+		printf("\"str_len\"            is '%zu'\n", first_list->str_len);
+		printf("\"sign\"              is '%c'\n", first_list->sign);
+		printf("\"pass_start\"        is '%zu'\n", first_list->pass_start);
+		printf("\"pass_length\"       is '%zu'\n", first_list->pass_length);
+		
+
+		printf("------------------------------------\n");
+
+
+		first_list = first_list->next;
 	}
-	va_end(ap);
-	ft_convert_to_string(first_list);
-	cntr = ft_final_print((char*)format, first_list);
-	ft_clear_the_struct(&first_list);
-	return (cntr);
+	return (1);
 }
