@@ -68,7 +68,7 @@ void	ft_ftoa(t_args *list)
 	size_t				sign_dig;
 
 	if (!list->float_arg)
-		list->string = ft_strdup("0.000000");
+		list->string = ft_strdup("0.");
 	else if (list->float_arg != list->float_arg)
 		list->string = ft_strdup("nan");
 	else if (list->float_arg == (list->float_arg + list->float_arg)

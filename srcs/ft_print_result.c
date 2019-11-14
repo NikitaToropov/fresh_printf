@@ -4,7 +4,6 @@
 void	ft_print_arg(t_args *list, size_t *counter)
 {
 	if (list->type)
-		ft_parse_len(list);
 }
 
 int		ft_print_result(const char *str, t_args **first)
@@ -25,9 +24,17 @@ int		ft_print_result(const char *str, t_args **first)
 		}
 		else
 		{
-			write(1, &str[i], (list->pass_start - i));
-			i = list->pass_start + list->pass_length;
-			counter += list->pass_start - i;
+			if (list)
+			{
+				write(1, &str[i], (list->pass_start - i));
+				i = list->pass_start + list->pass_length;
+			}
+			else
+			{
+				write(1, &str[i], ft_strlen(&str[i]));
+				counter += ft_strlen(&str[i]);
+				break ;
+			}
 		}
 	}
 	// ft_free_struct(first);

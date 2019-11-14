@@ -14,6 +14,7 @@ C_FILES = 	ft_printf.c\
 			sec_fts.c\
 			fields_parsers.c\
 			ft_parse_len.c\
+			ft_precision_f.c\
 			ft_ftoa.c\
 			fts_itoa.c\
 			ft_utf8_coder.c\

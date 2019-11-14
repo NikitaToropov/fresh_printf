@@ -5,6 +5,9 @@ static void		ft_convert_args(t_args *list)
 	while (list)
 	{
 		ft_parse_len(list);
+		if (list->type == 'f')
+			ft_precision_f(list);
+		list->str_len = ft_strlen(list->string);
 		list = list->next;
 	}
 }
@@ -120,6 +123,6 @@ int					ft_printf(const char *format, ...)
 
 		first_list = first_list->next;
 	}
-	// return (ft_print_result(format, &first_list));
+	return (ft_print_result(format, &first_list));
 	return (1);
 }

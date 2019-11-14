@@ -93,6 +93,8 @@ char			*ft_utf8_coder(int sym);
 // format string parsing
 t_args			*ft_parse_format(const char *str);
 void			ft_parse_len(t_args *list);
+void			ft_precision_f(t_args *list);
+
 
 // fields parsers
 size_t		ft_find_parameter(char *str, t_args *list);
