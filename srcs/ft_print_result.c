@@ -1,42 +1,34 @@
 #include "ft_printf.h"
 
-
-void	ft_print_arg(t_args *list, size_t *counter)
-{
-	if (list->type)
-}
-
-int		ft_print_result(const char *str, t_args **first)
+int		ft_print_result(char *str, t_args *list)
 {
 	int			counter;
-	t_args		*list;
-	size_t		i;
-	char		*p;
+	char		*tmp;
 
 	counter = 0;
-	list = *first;
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] == '%')
+		if (*str == '%')
 		{
-			ft_print_arg(list, &counter);
+			counter += ft_print_arg(list);
+			str = ft_strchr(&str[1], list->type) + 1;
 			list = list->next;
 		}
 		else
 		{
-			if (list)
+			if (list && (tmp = ft_strchr(str, '%')))
 			{
-				write(1, &str[i], (list->pass_start - i));
-				i = list->pass_start + list->pass_length;
+				write(1, str, (tmp - str));
+				counter += tmp - str;
+				str = tmp;
 			}
 			else
 			{
-				write(1, &str[i], ft_strlen(&str[i]));
-				counter += ft_strlen(&str[i]);
+				write(1, str, ft_strlen(str));
+				counter += ft_strlen(str);
 				break ;
 			}
 		}
 	}
-	// ft_free_struct(first);
 	return (counter);
 }

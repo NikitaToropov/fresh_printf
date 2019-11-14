@@ -62,11 +62,10 @@ typedef struct							s_args
 	char								length;
 	char								type;
 	
+	char								sign;
 	char								*string;
 	size_t								str_len;
-	char								sign;
-	size_t								pass_start;
-	size_t								pass_length;
+
 	struct s_args						*next;
 }										t_args;
 
@@ -88,6 +87,10 @@ char			*ft_utf8_coder(int sym);
 
 // final print
 // int				ft_print_result(const char *str, t_args **first);
+int		ft_print_result(char *str, t_args *list);
+int		ft_print_arg(t_args *list);
+
+
 
 
 // format string parsing

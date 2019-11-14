@@ -7,6 +7,13 @@ static void		ft_convert_args(t_args *list)
 		ft_parse_len(list);
 		if (list->type == 'f')
 			ft_precision_f(list);
+		if (ft_strchr("dif", list->type) && !(list->sign))
+		{
+			if (list->flags & PLUS)
+				list->sign = '+';
+			else if (list->flags & SPACE)
+				list->sign = ' ';
+		}
 		list->str_len = ft_strlen(list->string);
 		list = list->next;
 	}
@@ -78,6 +85,7 @@ int					ft_printf(const char *format, ...)
 	va_start(ap, format);
 	counter = 1;
 	latest = ft_find_latest_arg(first_list);
+
 	while (counter <= latest)
 	{
 		if ((type = ft_find_arg_type(first_list, counter)) == 'i')
@@ -93,36 +101,34 @@ int					ft_printf(const char *format, ...)
 	va_end(ap);
 	ft_convert_args(first_list);
 
-	while (first_list)
-	{
-		printf("\n\"order_counter\"   is '%zu'\n\n", first_list->order_counter);
+	// while (first_list)
+	// {
+	// 	printf("\n\"order_counter\"   is '%zu'\n\n", first_list->order_counter);
 
-		printf("\"num_width\"         is '%zu'\n", first_list->num_width);
-		printf("\"num_precision\"     is '%zu'\n", first_list->num_precision);
-		printf("\"num_arg\"           is '%zu'\n\n", first_list->num_arg);
+	// 	printf("\"num_width\"         is '%zu'\n", first_list->num_width);
+	// 	printf("\"num_precision\"     is '%zu'\n", first_list->num_precision);
+	// 	printf("\"num_arg\"           is '%zu'\n\n", first_list->num_arg);
 
-		printf("\"width\"             is '%i'\n", first_list->width);
-		printf("\"precision\"         is '%i'\n\n", first_list->precision);
+	// 	printf("\"width\"             is '%i'\n", first_list->width);
+	// 	printf("\"precision\"         is '%i'\n\n", first_list->precision);
 		
-		printf("\"flags\"             is '%i'\n", first_list->flags);
-		printf("\"length\"            is '%c'\n", first_list->length);
-		printf("\"type\"              is '%c'\n\n", first_list->type);
+	// 	printf("\"flags\"             is '%i'\n", first_list->flags);
+	// 	printf("\"length\"            is '%c'\n", first_list->length);
+	// 	printf("\"type\"              is '%c'\n\n", first_list->type);
 		
-		printf("\"float_arg\"         is '%Lf'\n", first_list->float_arg);
-		printf("\"float_arg\"         is '%lld'\n\n", first_list->int_arg);
+	// 	printf("\"float_arg\"         is '%Lf'\n", first_list->float_arg);
+	// 	printf("\"float_arg\"         is '%lld'\n\n", first_list->int_arg);
 		
-		printf("\"string\"            is '%s'\n", first_list->string);
-		printf("\"str_len\"            is '%zu'\n", first_list->str_len);
-		printf("\"sign\"              is '%c'\n", first_list->sign);
-		printf("\"pass_start\"        is '%zu'\n", first_list->pass_start);
-		printf("\"pass_length\"       is '%zu'\n", first_list->pass_length);
+	// 	printf("\"string\"            is '%s'\n", first_list->string);
+	// 	printf("\"str_len\"            is '%zu'\n", first_list->str_len);
+	// 	printf("\"sign\"              is '%c'\n", first_list->sign);
 		
 
-		printf("------------------------------------\n");
+	// 	printf("------------------------------------\n");
 
 
-		first_list = first_list->next;
-	}
-	return (ft_print_result(format, &first_list));
-	return (1);
+	// 	first_list = first_list->next;
+	// }
+	counter = ft_print_result((char*)format, first_list);
+	return (counter);
 }

@@ -1,5 +1,17 @@
 #include "ft_printf.h"
 
+void	ft_lengthen_str(t_args *list)
+{
+	char	*tmp;
+	size_t	new_len;
+
+	tmp = list->string;
+	new_len = 
+	if (!(list->string = ft_memalloc()))
+	while 
+}
+
+
 void	ft_add_carry(char *str)
 {
 	long int		i;
@@ -36,7 +48,9 @@ void	ft_precision_f(t_args *list)
 
 	if (list->precision == -1)
 		list->precision = 6;
-	frac = ft_strchr(list->string, '.') + 1;
+	if (!(frac = ft_strchr(list->string, '.')))
+		return ;
+	frac += 1;
 	frac_len = ft_strlen(frac);
 	if (list->precision < frac_len)
 	{
@@ -48,6 +62,8 @@ void	ft_precision_f(t_args *list)
 			ft_add_carry(list->string);
 		}
 	}
-	if (list->precision == 0 && !(list->flags & HASH))
+	if (frac_len < list->precision)
+		ft_lengthen_str(list, );
+	if (list->precision == 0 && !(list->flags & HASH) && frac)
 		*(frac - 1) = '\0';
 }

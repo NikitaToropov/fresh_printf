@@ -18,6 +18,8 @@ C_FILES = 	ft_printf.c\
 			ft_ftoa.c\
 			fts_itoa.c\
 			ft_utf8_coder.c\
+			ft_print_arg.c\
+			ft_print_result.c\
 
 
 HEADER = $(INCLUDES)/ft_printf.h

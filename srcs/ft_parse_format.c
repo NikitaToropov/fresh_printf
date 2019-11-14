@@ -1,28 +1,9 @@
 #include "ft_printf.h"
 
-static void	ft_analise_the_fields(t_args *list, size_t *i)
-{
-	if (list->type)
-	{
-		list->num_arg = list->order_counter;
-		list->order_counter++;
-		list->pass_length = *i - list->pass_start + 1;
-		(*i)++;
-	}
-	else if (list->str_len)
-	{
-		list->pass_length = *i - list->pass_start + 1;
-		(*i)++;
-	}
-	else
-		list->pass_length = *i - list->pass_start;
-}
-
 static void		ft_parse_inner(const char *str, t_args *list, size_t *i)
 {
 	size_t		tmp;
 
-	list->pass_start = (*i)++;
 	while (str[*i] && tmp != *i)
 	{
 		tmp = *i;
@@ -40,8 +21,10 @@ static void		ft_parse_inner(const char *str, t_args *list, size_t *i)
 			exit(1);
 		list->string[0] = str[*i];
 		list->str_len = ft_strlen(list->string);
+		list->type = str[*i];
 	}
-	ft_analise_the_fields(list, i);
+	if (!(list->string) && (list->num_arg = list->order_counter))
+		list->order_counter++;
 }
 
 static t_args	*ft_make_list(size_t counter)
@@ -66,10 +49,9 @@ static t_args	*ft_make_list(size_t counter)
 	list->length = 0;
 	list->type = 0;
 
+	list->sign = 0;
 	list->string = NULL;
 	list->str_len = 0;
-	list->sign = 0;
-	list->pass_length = 0;
 	list->next = NULL;
 	return (list);
 }
@@ -86,17 +68,18 @@ t_args			*ft_parse_format(const char *str)
 	{
 		if (str[i] == '%')
 		{
+			i++;
 			if (!first_list && (first_list = ft_make_list(1)))
 				list = first_list;
 			else if ((list->next = ft_make_list(list->order_counter)))
 				list = list->next;
 			ft_parse_inner(str, list, &i);
-		}
-		else
-		{
-			while (str[i] && str[i] != '%')
+			if (str[i])
 				i++;
 		}
+		else
+			while (str[i] && str[i] != '%')
+				i++;
 	}
 	return (first_list);
 }
