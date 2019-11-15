@@ -81,7 +81,6 @@ char			*ft_itoa(long long n);
 
 char			*ft_itoa_base(unsigned long long n, int base);
 char			*ft_itoa_base_upp(unsigned long long n, int base);
-char			*ft_itoa_pointer(unsigned long long n);
 void			ft_ftoa(t_args *list);
 char			*ft_utf8_coder(int sym);
 

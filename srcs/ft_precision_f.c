@@ -1,14 +1,27 @@
 #include "ft_printf.h"
 
-void	ft_lengthen_str(t_args *list)
+void	ft_lengthen_str(t_args *list, int frac_len)
 {
 	char	*tmp;
-	size_t	new_len;
+	int		new_len;
+	int		old_len;
+	int		i;;
 
+	old_len = ft_strlen(list->string);
+	new_len = old_len - frac_len + list->precision;
 	tmp = list->string;
-	new_len = 
-	if (!(list->string = ft_memalloc()))
-	while 
+	if (!(list->string = ft_memalloc(new_len + 1)))
+		exit (1);
+	i = 0;
+	while (i < new_len)
+	{
+		if (i < old_len)
+			list->string[i] = tmp[i];
+		else
+			list->string[i] = '0';
+		i++;
+	}
+	free(tmp);
 }
 
 
@@ -63,7 +76,7 @@ void	ft_precision_f(t_args *list)
 		}
 	}
 	if (frac_len < list->precision)
-		ft_lengthen_str(list, );
+		ft_lengthen_str(list, frac_len);
 	if (list->precision == 0 && !(list->flags & HASH) && frac)
 		*(frac - 1) = '\0';
 }

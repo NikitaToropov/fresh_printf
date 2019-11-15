@@ -106,9 +106,14 @@ void	ft_parse_len(t_args *list)
 	if (list->type == 'x' || list->type == 'X' || list->type == 'p')
 		ft_parse_types_x(list);
 	if (list->type == 'p')
-		list->string = ft_itoa_pointer(list->int_arg);
+		list->string = ft_itoa_base(list->int_arg, 16);
 	if (list->type == 'c')
 		list->string = ft_utf8_coder((int)list->int_arg);
 	if (list->type == 's')
-		list->string = ft_strdup((char*)list->int_arg);
+	{
+		if (list->int_arg)
+			list->string = ft_strdup((char*)list->int_arg);
+		else
+			list->string = ft_strdup("(null)");
+	}
 }

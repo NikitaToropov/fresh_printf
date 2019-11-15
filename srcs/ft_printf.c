@@ -7,12 +7,17 @@ static void		ft_convert_args(t_args *list)
 		ft_parse_len(list);
 		if (list->type == 'f')
 			ft_precision_f(list);
-		if (ft_strchr("dif", list->type) && !(list->sign))
+		if (list->flags & PLUS && ft_strchr("dif", list->type) && 
+		!(list->sign))
+			list->sign = '+';
+		if (list->flags & SPACE && ft_strchr("dif", list->type) && 
+		!(list->sign))
+			list->sign = ' ';
+		if (ft_strchr("uoxX", list->type) && !(list->int_arg))
 		{
-			if (list->flags & PLUS)
-				list->sign = '+';
-			else if (list->flags & SPACE)
-				list->sign = ' ';
+			list->flags &= ~HASH;
+			if (list->precision == 0)
+				list->string[0] = '\0';
 		}
 		list->str_len = ft_strlen(list->string);
 		list = list->next;
@@ -117,7 +122,7 @@ int					ft_printf(const char *format, ...)
 	// 	printf("\"type\"              is '%c'\n\n", first_list->type);
 		
 	// 	printf("\"float_arg\"         is '%Lf'\n", first_list->float_arg);
-	// 	printf("\"float_arg\"         is '%lld'\n\n", first_list->int_arg);
+	// 	printf("\"int_arg\"         is '%llu'\n\n", first_list->int_arg);
 		
 	// 	printf("\"string\"            is '%s'\n", first_list->string);
 	// 	printf("\"str_len\"            is '%zu'\n", first_list->str_len);
