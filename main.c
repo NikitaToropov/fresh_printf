@@ -24,8 +24,8 @@ int		main(void)
 	// printf("%#o\n", 012);
 	// printf("%.4o\n\n", 012);
 
-	printf("%0#14.3o\n", 12587499);
-	ft_printf("%0#14.3o\n", 12587499);
+	printf("% 42.2hhi\n", -1657093241);
+	ft_printf("% 42.2hhi\n", -1657093241);
 	return (0);
 }
 // TEST : test%#.4o et %02o %0#14.0o!!, 012, 036, 12587499
@@ -34,3 +34,4 @@ int		main(void)
 // printf     --> test0012 et 36      060010753!!
 // ret = 31
 // [KO]
+
