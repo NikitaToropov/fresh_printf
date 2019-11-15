@@ -110,5 +110,6 @@ size_t		ft_find_length(char *str, t_args *list);
 
 
 int				ft_printf(const char *format, ...);
+void			ft_clear_struct(t_args **first);
 
 #endif

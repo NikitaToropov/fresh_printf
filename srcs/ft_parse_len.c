@@ -32,10 +32,15 @@ void	ft_parse_types_di(t_args *list)
 	}
 	else
 	{
+		write(1, "!!!!!\n", 6);
 		if ((int)list->int_arg < 0 && (list->sign = '-'))
-			list->string = ft_itoa_base((int)list->int_arg * (-1), 10);
-		else
-			list->string = ft_itoa_base((int)list->int_arg, 10);
+		{
+			write(1, "!!!!!\n", 6);
+			list->int_arg = ~list->int_arg + 1;
+
+		}
+
+		list->string = ft_itoa_base((int)list->int_arg, 10);
 	}
 }
 

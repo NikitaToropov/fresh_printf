@@ -13,12 +13,13 @@ static void		ft_convert_args(t_args *list)
 		if (list->flags & SPACE && ft_strchr("dif", list->type) && 
 		!(list->sign))
 			list->sign = ' ';
-		if (ft_strchr("uoxX", list->type) && !(list->int_arg))
-		{
+		if (list->type == 'o' && !(list->int_arg) && list->flags & HASH)
 			list->flags &= ~HASH;
-			if (list->precision == 0)
-				list->string[0] = '\0';
-		}
+		else if (ft_strchr("uxXo", list->type) && !(list->int_arg) &&
+		!(list->precision))
+			list->string[0] = '\0';
+		if (ft_strchr("xX", list->type) && !(list->int_arg))
+			list->flags &= ~HASH;
 		list->str_len = ft_strlen(list->string);
 		list = list->next;
 	}
@@ -135,5 +136,6 @@ int					ft_printf(const char *format, ...)
 	// 	first_list = first_list->next;
 	// }
 	counter = ft_print_result((char*)format, first_list);
+	ft_clear_struct(&first_list);
 	return (counter);
 }

@@ -11,7 +11,9 @@ int		ft_print_result(char *str, t_args *list)
 		if (*str == '%')
 		{
 			counter += ft_print_arg(list);
-			str = ft_strchr(&str[1], list->type) + 1;
+			str = ft_strchr(&str[1], list->type);
+			if (*str)
+				str++;
 			list = list->next;
 		}
 		else

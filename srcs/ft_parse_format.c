@@ -4,7 +4,7 @@ static void		ft_parse_inner(const char *str, t_args *list, size_t *i)
 {
 	size_t		tmp;
 
-	while (str[*i] && tmp != *i)
+	while (str[*i])
 	{
 		tmp = *i;
 		*i += ft_find_parameter((char*)&str[*i], list);
@@ -12,6 +12,8 @@ static void		ft_parse_inner(const char *str, t_args *list, size_t *i)
 		*i += ft_find_width((char*)&str[*i], list);
 		*i += ft_find_precision((char*)&str[*i], list);
 		*i += ft_find_length((char*)&str[*i], list);
+		if (tmp == *i)
+			break ;
 	}
 	if (str[*i] && ft_strchr("diouxXfcsp", str[*i]))
 		list->type = str[*i];

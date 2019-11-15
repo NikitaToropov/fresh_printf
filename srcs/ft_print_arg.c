@@ -11,6 +11,7 @@ void	ft_analise_dif(t_args *list, int *n_zeros, int *n_spaces)
 	{
 		list->string[0]= '\0';
 		list->str_len= 0;
+		i--;
 	}
 	if (list->precision > (int)list->str_len && list->type != 'f')
 		*n_zeros += list->precision - list->str_len;
@@ -28,19 +29,16 @@ void	ft_analise_ouxp(t_args *list, int *n_zeros, int *n_spaces)
 	int		i;
 
 	i = list->str_len;
-
 	if (list->precision != -1)
 		list->flags &= ~ZERO;
 	if (list->precision > (int)list->str_len)
 		*n_zeros += list->precision - list->str_len;
-	if ((list->flags & HASH && list->type != 'o') || list->type == 'p')
+	if ((list->flags & HASH && ft_strchr("xX", list->type))
+	|| list->type == 'p')
 		i += 2;
-	if (list->flags & HASH && list->type == 'o')
-	{
-		i += 1;
+	if (list->flags & HASH && list->type == 'o' && (i += 1))
 		if (*n_zeros)
 			*n_zeros -= 1;
-	}
 	i += *n_zeros;
 	if (list->width > i && list->flags & ZERO)
 		*n_zeros += list->width - i;

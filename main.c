@@ -4,6 +4,7 @@
 // #include <unistd.h>
 // #include <stdlib.h>
 #include <float.h>
+#include <limits.h>	
 
 // test %-7C %007d%-10.2ls!!, 0xd777, 0x45, L"〻
 int		main(void)
@@ -24,14 +25,24 @@ int		main(void)
 	// printf("%#o\n", 012);
 	// printf("%.4o\n\n", 012);
 
-	printf("% 42.2hhi\n", -1657093241);
-	ft_printf("% 42.2hhi\n", -1657093241);
+
+	printf("%-dn\n", INT_MIN);
+	ft_printf("%-dn\n", INT_MIN);
+	ft_printf("%-dn\n", INT_MIN);
+	// printf("%-dn", INT_MIN)
 	return (0);
 }
-// TEST : test%#.4o et %02o %0#14.0o!!, 012, 036, 12587499
-// ft_printf  --> test00012 et 36      060010753!!
-// ret = 32
-// printf     --> test0012 et 36      060010753!!
-// ret = 31
-// [KO]
+// Test 1278 (o_prec0val0_af) : FAILED.
+//     First line of code: {return test("%#.0o", 0);}
+//       expected output : "0"
+//       your output     : ""
+//       expected (nonprintable as hex) : "0"
+//       actual   (nonprintable as hex) : ""
+
+// Test 1279 (o_prec0val0_af_impl) : FAILED.
+//     First line of code: {return test("%#.o", 0);}
+//       expected output : "0"
+//       your output     : ""
+//       expected (nonprintable as hex) : "0"
+//       actual   (nonprintable as hex) : ""
 
