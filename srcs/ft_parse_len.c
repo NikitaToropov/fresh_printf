@@ -103,7 +103,7 @@ void	ft_parse_len(t_args *list)
 		ft_parse_types_di(list);
 	if (list->type == 'u' || list->type == 'o')
 		ft_parse_types_uo(list);
-	if (list->type == 'x' || list->type == 'X' || list->type == 'p')
+	if (list->type == 'x' || list->type == 'X')
 		ft_parse_types_x(list);
 	if (list->type == 'p')
 		list->string = ft_itoa_base(list->int_arg, 16);
