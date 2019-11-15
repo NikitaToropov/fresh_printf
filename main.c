@@ -26,9 +26,9 @@ int		main(void)
 	// printf("%.4o\n\n", 012);
 
 
-	printf("%-dn\n", INT_MIN);
-	ft_printf("%-dn\n", INT_MIN);
-	ft_printf("%-dn\n", INT_MIN);
+	printf("%-d\n", INT_MIN);
+	ft_printf("%-d\n",INT_MIN);
+	
 	// printf("%-dn", INT_MIN)
 	return (0);
 }
