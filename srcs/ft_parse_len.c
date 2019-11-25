@@ -92,23 +92,28 @@ void		ft_parse_types_x(t_args *list)
 
 void	ft_parse_len(t_args *list)
 {
-	if (list->type == 'f')
-		ft_ftoa(list);
-	if (list->type == 'd' || list->type == 'i')
-		ft_parse_types_di(list);
-	if (list->type == 'u' || list->type == 'o')
-		ft_parse_types_uo(list);
-	if (list->type == 'x' || list->type == 'X')
-		ft_parse_types_x(list);
-	if (list->type == 'p')
-		list->string = ft_itoa_base(list->int_arg, 16);
-	if (list->type == 'c')
-		list->string = ft_utf8_coder((int)list->int_arg);
-	if (list->type == 's')
+	if (list->flags & BINARY && ft_strchr("idfuc", list->type))
+		ft_put_bits(list);
+	else
 	{
-		if (list->int_arg)
-			list->string = ft_strdup((char*)list->int_arg);
-		else
-			list->string = ft_strdup("(null)");
+		if (list->type == 'f')
+			ft_ftoa(list);
+		if (list->type == 'd' || list->type == 'i')
+			ft_parse_types_di(list);
+		if (list->type == 'u' || list->type == 'o')
+			ft_parse_types_uo(list);
+		if (list->type == 'x' || list->type == 'X')
+			ft_parse_types_x(list);
+		if (list->type == 'p')
+			list->string = ft_itoa_base(list->int_arg, 16);
+		if (list->type == 'c')
+			list->string = ft_utf8_coder((int)list->int_arg);
+		if (list->type == 's')
+		{
+			if (list->int_arg)
+				list->string = ft_strdup((char*)list->int_arg);
+			else
+				list->string = ft_strdup("(null)");
+		}
 	}
 }

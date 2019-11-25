@@ -26,8 +26,8 @@ int		main(void)
 	// printf("%.4o\n\n", 012);
 
 
-	printf("%-d\n", INT_MIN);
-	ft_printf("%-d\n",INT_MIN);
+	
+	ft_printf("%bd\n", 255);
 	
 	// printf("%-dn", INT_MIN)
 	return (0);

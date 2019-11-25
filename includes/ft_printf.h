@@ -95,8 +95,8 @@ int		ft_print_arg(t_args *list);
 // format string parsing
 t_args			*ft_parse_format(const char *str);
 void			ft_parse_len(t_args *list);
+void			ft_put_bits(t_args *list);
 void			ft_precision_f(t_args *list);
-
 
 // fields parsers
 size_t		ft_find_parameter(char *str, t_args *list);

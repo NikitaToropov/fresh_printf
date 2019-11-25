@@ -37,7 +37,7 @@ size_t		ft_find_flag(char c, t_args *list)
 		list->flags &= (~ZERO);
 	if (list->flags & PLUS)
 		list->flags &= (~SPACE);
-	if (c && ft_strchr("#0-+' ", c))
+	if (c && ft_strchr("b#0-+' ", c))
 		return (1);
 	return (0);
 }

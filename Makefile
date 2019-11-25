@@ -21,6 +21,7 @@ C_FILES = 	ft_printf.c\
 			ft_print_arg.c\
 			ft_print_result.c\
 			ft_clear_struct.c\
+			ft_put_bits.c\
 
 HEADER = $(INCLUDES)/ft_printf.h
 
