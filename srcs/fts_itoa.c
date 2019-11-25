@@ -30,7 +30,7 @@ char			*ft_itoa(long long n)
 		result[0] = '-';
 	while (number)
 	{
-		result[--len] = number % 10  + '0';
+		result[--len] = number % 10 + '0';
 		number /= 10;
 	}
 	return (result);

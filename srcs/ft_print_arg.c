@@ -9,8 +9,8 @@ void	ft_analise_dif(t_args *list, int *n_zeros, int *n_spaces)
 		list->flags &= ~ZERO;
 	if (!(list->precision) && list->type != 'f' && !(list->int_arg))
 	{
-		list->string[0]= '\0';
-		list->str_len= 0;
+		list->string[0] = '\0';
+		list->str_len = 0;
 		i--;
 	}
 	if (list->precision > (int)list->str_len && list->type != 'f')
@@ -49,7 +49,7 @@ void	ft_analise_ouxp(t_args *list, int *n_zeros, int *n_spaces)
 void	ft_analise_cs(t_args *list, int *n_zeros, int *n_spaces)
 {
 	int		i;
-	
+
 	if (list->precision != -1 && list->precision < (int)list->str_len &&
 	list->type != '%')
 		list->str_len = list->precision;
@@ -65,7 +65,7 @@ void	ft_analise_cs(t_args *list, int *n_zeros, int *n_spaces)
 int		ft_write_all(t_args *list, int n_zeros, int n_spaces)
 {
 	int		counter;
-	
+
 	counter = n_spaces + n_zeros + list->str_len;
 	if (!(list->flags & MINUS))
 		while (n_spaces-- > 0)
@@ -100,5 +100,5 @@ int		ft_print_arg(t_args *list)
 		ft_analise_ouxp(list, &n_zeros, &n_spaces);
 	else
 		ft_analise_cs(list, &n_zeros, &n_spaces);
-	return(ft_write_all(list, n_zeros, n_spaces));
+	return (ft_write_all(list, n_zeros, n_spaces));
 }

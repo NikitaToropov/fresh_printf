@@ -5,13 +5,13 @@ void	ft_lengthen_str(t_args *list, int frac_len)
 	char	*tmp;
 	int		new_len;
 	int		old_len;
-	int		i;;
+	int		i;
 
 	old_len = ft_strlen(list->string);
 	new_len = old_len - frac_len + list->precision;
 	tmp = list->string;
 	if (!(list->string = ft_memalloc(new_len + 1)))
-		exit (1);
+		exit(1);
 	i = 0;
 	while (i < new_len)
 	{
@@ -23,7 +23,6 @@ void	ft_lengthen_str(t_args *list, int frac_len)
 	}
 	free(tmp);
 }
-
 
 void	ft_add_carry(char *str)
 {

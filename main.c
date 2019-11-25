@@ -27,7 +27,7 @@ int		main(void)
 
 
 	
-	ft_printf("%bd\n", 255);
+	ft_printf("%bc\n", 128588);
 	
 	// printf("%-dn", INT_MIN)
 	return (0);

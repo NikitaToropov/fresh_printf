@@ -18,7 +18,7 @@ void		*ft_memalloc(size_t size)
 char		*ft_strdup(const char *s1)
 {
 	char			*res;
-	long long int		ln;
+	long long int	ln;
 
 	if (!s1)
 		return (NULL);

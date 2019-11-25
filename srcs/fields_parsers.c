@@ -74,6 +74,7 @@ size_t		ft_find_width(char *str, t_args *list)
 size_t		ft_find_precision(char *str, t_args *list)
 {
 	char	*tmp_str;
+
 	if (str[0] == '.')
 	{
 		if (str[1] == '*' && (str[2] >= '0' || str[2] <= '9') && str[3] == '$')

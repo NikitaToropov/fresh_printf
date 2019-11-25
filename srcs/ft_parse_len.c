@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void	ft_parse_types_di(t_args *list)
+void		ft_parse_types_di(t_args *list)
 {
 	if (list->length == LONG)
 	{
@@ -34,7 +34,7 @@ void	ft_parse_types_di(t_args *list)
 	}
 }
 
-void	ft_parse_types_uo(t_args *list)
+void		ft_parse_types_uo(t_args *list)
 {
 	if (list->type == 'o')
 	{
@@ -90,7 +90,7 @@ void		ft_parse_types_x(t_args *list)
 		list->string = ft_itoa_base_upp((unsigned int)list->int_arg, 16);
 }
 
-void	ft_parse_len(t_args *list)
+void		ft_parse_len(t_args *list)
 {
 	if (list->flags & BINARY && ft_strchr("idfuc", list->type))
 		ft_put_bits(list);

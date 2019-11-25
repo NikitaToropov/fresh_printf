@@ -36,21 +36,16 @@ static t_args	*ft_make_list(size_t counter)
 	if (!(list = malloc(sizeof(t_args))))
 		exit(1);
 	list->order_counter = counter;
-
 	list->num_width = 0;
 	list->num_precision = 0;
 	list->num_arg = 0;
-
 	list->width = -1;
 	list->precision = -1;
-
 	list->int_arg = 0;
 	list->float_arg = 0;
-	
 	list->flags = 0;
 	list->length = 0;
 	list->type = 0;
-
 	list->sign = 0;
 	list->string = NULL;
 	list->str_len = 0;

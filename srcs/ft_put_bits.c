@@ -7,7 +7,8 @@ char	*ft_make_string_bin(void *c, int len)
 	char			*str;
 	unsigned int	pos;
 
-	str = (char*)malloc(sizeof(char) * (len * 8 + (len * 2 - 1) + 1));
+	if (!(str = ft_memalloc(len * 8 + (len * 2 - 1) + 1)))
+		exit(1);
 	byte = (unsigned char*)c + len - 1;
 	pos = 0;
 	while (byte >= (unsigned char*)c)
@@ -15,21 +16,16 @@ char	*ft_make_string_bin(void *c, int len)
 		scanner = 128;
 		while (scanner)
 		{
+			str[pos] = '0';
 			if (*byte & scanner)
 				str[pos] = '1';
-			else
-				str[pos] = '0';
 			pos++;
 			if (scanner == 16 || (scanner == 1 && byte != (unsigned char*)c))
-			{
-				str[pos] = ' ';
-				pos++;
-			}
+				str[pos++] = ' ';
 			scanner /= 2;
 		}
 		byte--;
 	}
-	str[pos] = '\0';
 	return (str);
 }
 
