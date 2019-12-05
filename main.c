@@ -27,7 +27,22 @@ int		main(void)
 
 
 	
-	ft_printf("%bc\n", 128588);
+	printf("%.20f\n", -3.85);
+	ft_printf("%.20f\n\n", -3.85);
+	printf("%.1f\n", -3.85);
+	ft_printf("%.1f\n\n", -3.85);
+
+	ft_printf("------------\n");
+	printf("%.20f\n", 0.5);
+	ft_printf("%.20f\n\n", 0.5);
+	printf("%.0f\n", 0.5);
+	ft_printf("%.0f\n\n", 0.5);
+	ft_printf("------------\n");
+	
+	printf("%.0f\n", 3.25);
+	ft_printf("%.0f\n\n", 3.25);
+	printf("%.1f\n", 3.25);
+	ft_printf("%.1f\n\n", 3.25);
 	
 	// printf("%-dn", INT_MIN)
 	return (0);
