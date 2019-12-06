@@ -26,14 +26,14 @@ int		ft_any_body_home(char *str)
 int		ft_bank_check(t_args *list)
 {
 	char	*frac;
-	char	c;
+	int		c;
 
 	frac = ft_strchr(list->string, '.') + 1;
 	if (list->precision == 0)
-		c = frac[list->precision - 2];
+		c = (int)(*(frac - 2) - '0') % 2;
 	else
-		c = frac[list->precision - 1];
-	if ((c - '0') % 2)
+		c = (int)(frac[list->precision - 1] - '0') % 2;
+	if (c == 0 && frac[list->precision] == '5' && !ft_any_body_home(&frac[list->precision + 1]))
 		return (1);
 	return (0);
 }
@@ -105,13 +105,15 @@ void	ft_precision_f(t_args *list)
 	if (list->precision < frac_len)
 	{
 		// if (frac[list->precision] < '5')
-		if (frac[list->precision] < '5' || (frac[list->precision] == '5' &&
-		!ft_any_body_home(&frac[list->precision + 1]) && !ft_bank_check(list)))
-			frac[list->precision] = '\0';
-		else
+		if (frac[list->precision] > '5' ||
+		(frac[list->precision] == '5' && !ft_bank_check(list)))
 		{
 			frac[list->precision] = '\0';
 			ft_add_carry(list->string);
+		}
+		else
+		{
+			frac[list->precision] = '\0';
 		}
 	}
 	// if (frac_len < list->precision)

@@ -27,25 +27,9 @@ int		main(void)
 
 
 	
-	printf("%.20f\n", -3.85);
-	ft_printf("%.20f\n\n", -3.85);
-	printf("%.1f\n", -3.85);
-	ft_printf("%.1f\n\n", -3.85);
-
-	ft_printf("------------\n");
-	printf("%.20f\n", 0.5);
-	ft_printf("%.20f\n\n", 0.5);
-	printf("%.0f\n", 0.5);
-	ft_printf("%.0f\n\n", 0.5);
-	ft_printf("------------\n");
-	
-	printf("%.0f\n", 3.25);
-	ft_printf("%.0f\n\n", 3.25);
-	printf("%.1f\n", 3.25);
-	ft_printf("%.1f\n\n", 3.25);
-	
-	// printf("%-dn", INT_MIN)
-	return (0);
+	printf("%.20f\n", -56.47852012685);
+	ft_printf("%.20f", -56.47852012685);
+		return (0);
 }
 // Test 1278 (o_prec0val0_af) : FAILED.
 //     First line of code: {return test("%#.0o", 0);}
