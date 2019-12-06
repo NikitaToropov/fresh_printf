@@ -12,21 +12,9 @@
 
 #include "ft_printf.h"
 
-void		ft_parse_types_di(t_args *list)
+void		ft_parse_types_di_part_two(t_args *list)
 {
-	if (list->length == LONG)
-	{
-		if ((long int)list->int_arg < 0 && (list->sign = '-'))
-			list->int_arg = ~list->int_arg + 1;
-		list->string = ft_itoa_base((unsigned long int)list->int_arg, 10);
-	}
-	else if (list->length == LONG_LONG)
-	{
-		if ((long long int)list->int_arg < 0 && (list->sign = '-'))
-			list->int_arg = ~list->int_arg + 1;
-		list->string = ft_itoa_base((unsigned long long int)list->int_arg, 10);
-	}
-	else if (list->length == SHORT)
+	if (list->length == SHORT)
 	{
 		if ((short)list->int_arg < 0 && (list->sign = '-'))
 			list->int_arg = ~list->int_arg + 1;
@@ -44,6 +32,24 @@ void		ft_parse_types_di(t_args *list)
 			list->int_arg = ~list->int_arg + 1;
 		list->string = ft_itoa_base((unsigned int)list->int_arg, 10);
 	}
+}
+
+void		ft_parse_types_di(t_args *list)
+{
+	if (list->length == LONG)
+	{
+		if ((long int)list->int_arg < 0 && (list->sign = '-'))
+			list->int_arg = ~list->int_arg + 1;
+		list->string = ft_itoa_base((unsigned long int)list->int_arg, 10);
+	}
+	else if (list->length == LONG_LONG)
+	{
+		if ((long long int)list->int_arg < 0 && (list->sign = '-'))
+			list->int_arg = ~list->int_arg + 1;
+		list->string = ft_itoa_base((unsigned long long int)list->int_arg, 10);
+	}
+	else
+		ft_parse_types_di_part_two(list);
 }
 
 void		ft_parse_types_uo(t_args *list)
