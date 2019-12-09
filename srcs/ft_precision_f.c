@@ -6,7 +6,7 @@
 /*   By: cmissy <cmissy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 18:27:15 by cmissy            #+#    #+#             */
-/*   Updated: 2019/12/05 21:28:41 by cmissy           ###   ########.fr       */
+/*   Updated: 2019/12/09 11:18:17 by cmissy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int		ft_bank_check(t_args *list)
 		c = (int)(*(frac - 2) - '0') % 2;
 	else
 		c = (int)(frac[list->precision - 1] - '0') % 2;
-	if (c == 0 && frac[list->precision] == '5' && !ft_any_body_home(&frac[list->precision + 1]))
+	if (c == 0 && frac[list->precision] == '5' &&
+	!ft_any_body_home(&frac[list->precision + 1]))
 		return (1);
 	return (0);
 }
@@ -104,7 +105,6 @@ void	ft_precision_f(t_args *list)
 	frac_len = ft_strlen(frac);
 	if (list->precision < frac_len)
 	{
-		// if (frac[list->precision] < '5')
 		if (frac[list->precision] > '5' ||
 		(frac[list->precision] == '5' && !ft_bank_check(list)))
 		{
@@ -112,11 +112,8 @@ void	ft_precision_f(t_args *list)
 			ft_add_carry(list->string);
 		}
 		else
-		{
 			frac[list->precision] = '\0';
-		}
 	}
-	// if (frac_len < list->precision)
 	else
 		ft_lengthen_str(list, frac_len);
 	if (list->precision == 0 && !(list->flags & HASH) && frac)
